@@ -128,7 +128,7 @@
             $totalFixedWidths: $totalFixedWidths - $columnWidth;
         }
 
-        [data-column~=#{$columnToDisplay}] {
+        [data-column~="#{$columnToDisplay}"] {
             @if ($clear != null) {
                 clear: $clear;
             }
