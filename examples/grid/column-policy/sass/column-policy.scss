@@ -1,0 +1,50 @@
+@import "../../../../grid/_column-policy";
+
+$max-content-width: 14 * 80px;
+$large-size: 13 * 80px;
+$medium-size: 9 * 80px;
+$fixed-width-column: 320px;
+$gutter: 20px;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.page {
+    @media (min-width: $medium-size) {
+        @include column-policy(50%, 50%);
+
+        [data-column~="1"] .module {
+            padding-right: $gutter / 2;
+        }
+
+        [data-column~="2"] .module {
+            padding-left: $gutter / 2;
+        }
+    }
+
+    @media (min-width: $large-size) {
+        @include column-policy($fixed-width-column, 100%, $fixed-width-column);
+
+        [data-column] .module {
+            padding-right: $gutter;
+        }
+
+        [data-column] .module {
+            padding-left: $gutter;
+        }
+    }
+}
+
+.page-padding {
+    margin: 0 $gutter;
+    max-width: $max-content-width - $gutter;
+
+    @media (min-width: $max-content-width + $gutter) {
+        margin: 0 auto;
+    }
+}
