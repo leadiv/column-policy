@@ -1,0 +1,141 @@
+@import "../utilities/_clear-fix";
+
+//
+// Defines styles for all columns.
+//
+[data-column] {
+    clear: none;
+    float: left;
+    position: relative;
+}
+
+//
+// This mixin generates styles for the column block. It deines how each
+// column should act (fixed vs. fluid). A data-column attribute
+// indicates that the div is part of a grid column layout. The value of
+// the data-column attribute indicates which column the content should
+// show up in. The value can have multiple values delimited by spaces. 
+// For this mixin the column modifiers must follow the physical ordering
+// of the divs (the first div has an attribute of data-column="1", the
+// second div data-column="2".
+//
+// Example of creating a simple two column layout with a fixed width
+// second column:
+//
+// HTML
+//
+//     <div class="content">
+//         <div data-column="1">Some content here</div>
+//         <div data-column="2">Some additional content here</div>
+//         <div data-column="1">Some content here</div>
+//         <div data-column="2">Some additional content here</div>
+//     </div>
+//
+// SASS
+//
+//     .content {
+//         @include column-policy(100%, 320px);
+//     }
+//
+// Example of creating a fluid 3 column layout for screen sizes of 800px
+// or greater and a two column layout for screen sizes less then 800px.
+//
+// HTML
+//
+//     <div class="content">
+//         <div data-column="1 1">Some content here</div>
+//         <div data-column="2 2">Some content here</div>
+//         <div data-column="1 3">Some content here</div>
+//         <div data-column="2 1">Some content here</div>
+//         <div data-column="1 2">Some content here</div>
+//         <div data-column="2 3">Some content here</div>
+//     </div>
+//
+// SASS
+// 
+//     .content {
+//         @include column-policy(100%, 320px);
+//
+//         @media (min-width: 800px) {
+//             @include column-policy(33%, 34%, 33%);
+//         }
+//     }
+//
+@mixin column-policy($columnWidths...) {
+    $totalColumns: length($columnWidths);
+    $fixedWidths: 0;
+
+    //
+    // Cacluate the correct padding needed based on the total fixed
+    // width columns.
+    //
+    @each $width in $columnWidths {
+        $unit: unit($width);
+
+        @if ($unit != "%") {
+            $fixedWidths: $fixedWidths + $width;
+        }
+    }
+
+    & {
+        @include clear-fix;
+        padding-left: $fixedWidths;
+    }
+
+    //
+    // Determine the left and left-margin to generate for each column.
+    //
+    $totalFixedWidths: $fixedWidths;
+    $totalPercentageWidths: null;
+    @for $columnToDisplay from 1 to $totalColumns + 1 {
+        $clear: null;
+        $columnWidth: nth($columnWidths, $columnToDisplay);
+        $left: null;
+        $margin: null;
+
+        @if ($columnToDisplay == 1) {
+            $clear: left;
+        }
+
+        @if ($columnToDisplay == $totalColumns) {
+            $clear: right;
+        }
+
+        //
+        // Fluid and fixed columns are treated differently. Fluid
+        // columns get the left property modified this way the column
+        // afterward the fluid column do not need to calculate the fluid
+        // width when trying to move into place. Fixed columns get the
+        // margin-left property modified.
+        //
+        @if (unit($columnWidth) == "%") {
+            $margin: 0;
+            $left: -$totalFixedWidths;
+
+            @if ($totalPercentageWidths == null) {
+                $totalPercentageWidths: 100%;
+            }
+
+            $totalPercentageWidths: $totalPercentageWidths - $columnWidth;
+        } @else {
+            $margin: -$totalFixedWidths;
+            $left: -$totalPercentageWidths;
+
+            @if ($totalPercentageWidths == null) {
+                $left: 0;
+            }
+
+            $totalFixedWidths: $totalFixedWidths - $columnWidth;
+        }
+
+        [data-column~=#{$columnToDisplay}] {
+            @if ($clear != null) {
+                clear: $clear;
+            }
+
+            left: $left; 
+            margin-left: $margin;
+            width: $columnWidth;
+        }
+    }
+}
