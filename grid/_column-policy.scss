@@ -127,7 +127,7 @@
             $totalFixedWidths: $totalFixedWidths - $columnWidth;
         }
 
-        [data-column~="#{$columnToDisplay}"] {
+        [data-column~="#{$totalColumns}-#{$columnToDisplay}"] {
             clear: $clear;
             left: $left; 
             margin-left: $margin;
