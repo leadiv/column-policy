@@ -103,9 +103,9 @@
         //
         // Fluid and fixed columns are treated differently. Fluid
         // columns get the left property modified this way the column
-        // afterward the fluid column do not need to calculate the fluid
-        // width when trying to move into place. Fixed columns get the
-        // margin-left property modified.
+        // following the fluid column does not need to calculate the
+        // fluid width when trying to move into place. Fixed columns
+        // get the margin-left property modified.
         //
         @if (unit($columnWidth) == "%") {
             $margin: 0;
