@@ -4,7 +4,6 @@
 // Defines styles for all columns.
 //
 [data-column] {
-    clear: none;
     float: left;
     position: relative;
 }
@@ -88,7 +87,7 @@
     $totalFixedWidths: $fixedWidths;
     $totalPercentageWidths: null;
     @for $columnToDisplay from 1 to $totalColumns + 1 {
-        $clear: null;
+        $clear: none;
         $columnWidth: nth($columnWidths, $columnToDisplay);
         $left: null;
         $margin: null;
@@ -129,10 +128,7 @@
         }
 
         [data-column~="#{$columnToDisplay}"] {
-            @if ($clear != null) {
-                clear: $clear;
-            }
-
+            clear: $clear;
             left: $left; 
             margin-left: $margin;
             width: $columnWidth;
