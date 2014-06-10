@@ -1,9 +1,10 @@
 @import "../utilities/_clear-fix";
 
-$column-policy-flag-nth-of-type-support: true !default;
-$column-policy-flag-data-attribute-support: true !default;
-$column-policy-flag-nth-child-hack-support: false !default;
-$column-policy-flag-nth-child-hack-depth: 20 !default;
+$column-policy-flag-nth-of-type-support: null;
+$column-policy-flag-data-attribute-support: null;
+$column-policy-flag-nth-child-hack-support: null;
+$column-policy-flag-nth-child-hack-depth: null;
+$column-policy-flag-use-once: null;
 
 //
 // Defines styles for all columns.
@@ -195,3 +196,8 @@ $column-policy-flag-nth-child-hack-depth: 20 !default;
     $column-policy-flag-nth-child-hack-depth: $set-nth-child-hack-depth;
     $column-policy-flag-use-once: $use-once;
 }
+
+//
+// Set the options to their defaults.
+//
+@include column-policy-options;
