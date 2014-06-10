@@ -8,6 +8,7 @@ $column-policy-flag-nth-child-hack-depth: 20 !default;
 //
 // Defines styles for all columns.
 //
+.column,
 [data-column] {
     float: left;
     position: relative;
