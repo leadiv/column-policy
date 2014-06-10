@@ -17,14 +17,23 @@ $column-policy-flag-use-once: null;
 
 //
 // This mixin generates styles for the column block. It deines how each
-// column should act (fixed vs. fluid). A data-column attribute
-// indicates that the div is part of a grid column layout. The value of
-// the data-column attribute indicates which column the content should
-// show up in. The value can have multiple values delimited by spaces. 
-// For this mixin the column modifiers must follow the physical ordering
-// of the divs (the first div has an attribute of data-column="2-1", the
-// second div data-column="2-2".
+// column should act (fixed vs. fluid). There are two main approaches 
+// that can be taken when creating columns: dynamic and static. Dynamic
+// refers to the ability to add new elements to the column grid on the
+// fly (e.g. via javascript). Static refers to a layout whose DOM can
+// not be changed on the fly by just adding a new element and the
+// formatting just "updates".
 //
+// For the dynamic approach a class of column is only needed. For the
+// static approach a data-column attribute is needed to indicate that
+// the div is part of a grid column layout. The value of the data-column
+// attribute indicates which column the content should show up in. The
+// value can have multiple values delimited by spaces. The column
+// modifiers must follow the physical ordering of the divs (the first
+// div has an attribute of data-column="2-1", the second div
+// data-column="2-2", etc.).
+//
+// Static examples:
 // Example of creating a simple two column layout with a fixed width
 // second column:
 //
@@ -38,9 +47,10 @@ $column-policy-flag-use-once: null;
 //     </div>
 //
 // SASS
-//
+// 
 //     .content {
-//         @include column-policy(100%, 320px);
+//         @include column-policy-options($use-data-attribute:true, $use-nth-of-type:false, $use-once:true);
+//         @include column-policy(100%, 320px); // After this call the options set previously are reset back to their defaults.
 //     }
 //
 // Example of creating a fluid 3 column layout for screen sizes of 800px
@@ -55,6 +65,51 @@ $column-policy-flag-use-once: null;
 //         <div data-column="2-2 3-1">Some content here</div>
 //         <div data-column="2-1 3-2">Some content here</div>
 //         <div data-column="2-2 3-3">Some content here</div>
+//     </div>
+//
+// SASS
+// 
+//     @include column-policy-options($use-data-attribute:true, $use-nth-of-type:false);
+//     .content {
+//         @include column-policy(100%, 320px);
+//
+//         @media (min-width: 800px) {
+//             @include column-policy(33%, 34%, 33%);
+//         }
+//     }
+//     @include column-policy-options(); // Resets the options back to the defaults.
+//
+// Dynamic examples
+// Example of creating a simple two column layout with a fixed width
+// second column:
+//
+// HTML
+//
+//     <div class="content">
+//         <div class="column">Some content here</div>
+//         <div class="column">Some additional content here</div>
+//         <div class="column">Some content here</div>
+//         <div class="column">Some additional content here</div>
+//     </div>
+//
+// SASS
+//
+//     .content {
+//         @include column-policy(100%, 320px);
+//     }
+//
+// Example of creating a fluid 3 column layout for screen sizes of 800px
+// or greater and a two column layout for screen sizes less then 800px.
+//
+// HTML
+//
+//     <div class="content">
+//         <div class="column">Some content here</div>
+//         <div class="column">Some content here</div>
+//         <div class="column">Some content here</div>
+//         <div class="column">Some content here</div>
+//         <div class="column">Some content here</div>
+//         <div class="column">Some content here</div>
 //     </div>
 //
 // SASS
@@ -147,6 +202,13 @@ $column-policy-flag-use-once: null;
     }
 }
 
+//
+// Writes out the styles needed for a specific column given the approach to use from the global flags.
+//
+// @access private
+// @param number $total: (required) The total number of columns.
+// @param number $current: (requried) The current column that the styles are to be applied.
+//
 @mixin _column($total, $current) {
     $column-selectors: _column-selectors($total, $current);
 
@@ -155,6 +217,15 @@ $column-policy-flag-use-once: null;
     }
 }
 
+//
+// Generates the list of css selectors as a string to be applied to the column styles.
+// Each selector generated is separated by a comma.
+//
+// @access private
+// @param number $total: (required) The total number of columns that the selectors should use as a context.
+// @param number $current: (required) The current column that the selectors should use as its context.
+// @returns: A string with all the selectors generated.
+//
 @function _column-selectors($total, $current) {
     $column-selectors: "";
     $selector-separator: "";
@@ -182,6 +253,14 @@ $column-policy-flag-use-once: null;
     @return $column-selectors;
 }
 
+//
+// Emulates nth-child with css styles.
+//
+// @access private
+// @param number $number: (required) The child count of which item to select. Any number lower then 1 will return a first-child selector.
+// @param string $element: (required) The element selector to use. This could be a class name or element tag but needs to be kept simple.
+// @returns: The selector as a string.
+//
 @function _nth-child-hack($number, $element) {
     $selector: $element + ":first-child";
     $minimum: 2;
@@ -193,6 +272,17 @@ $column-policy-flag-use-once: null;
     @return $selector;
 }
 
+//
+// Sets the global options for column policy processing or resets the global options to the defaults.
+//
+// @access public
+// @param boolean $use-nth-of-type: (optional) If true then styles using nth-of-type will be generated to create the columns.
+// @param boolean $use-data-attribute: (optional) If true then styles using data-column will be generated to create the columns.
+// @param boolean $use-nth-child-hack: (optional) If true then styles using the adjcent selector (+) and first-child will be generated to create the columns. This is really only for browsers that are unable to use nth-child.
+// @param number $set-nth-child-hack-depth: (optional) The max items that will be considered when using the nth-child-hack option. Any items after will not be put in a column but use the default styling only for all columns.
+// @param boolean $use-once: (optional) If true then the custom options set will only be used on the next call to column-policy all calls afterward will use the default options as first defined by the library.
+// @returns: Boolean true.
+//
 @mixin column-policy-options($use-nth-of-type:true, $use-data-attribute:false, $use-nth-child-hack:false, $set-nth-child-hack-depth:20, $use-once:false) {
     $column-policy-flag-nth-of-type-support: $use-nth-of-type;
     $column-policy-flag-data-attribute-support: $use-data-attribute;
