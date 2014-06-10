@@ -140,3 +140,30 @@ $column-policy-flag-nth-child-hack-depth: 20 !default;
         }
     }
 }
+
+@function _column-selectors($total, $current) {
+    $column-selectors: "";
+    $selector-separator: "";
+    $item-count: 0;
+
+    @if ($column-policy-flag-data-attribute-support) {
+        $column-selectors: $column-selectors + $selector-separator + '[data-column~="' + $total + "-" + $current + '"]';
+        $selector-separator: ",";
+    }
+
+    @if ($column-policy-flag-nth-of-type-support) {
+        $column-selectors: $column-selectors + $selector-separator + "> .column:nth-of-type(" + $total + "n+" + $current + ")";
+        $selector-separator: ",";
+    }
+
+    @if ($column-policy-flag-nth-child-hack-support) {
+        @while ($item-count < $column-policy-flag-nth-child-hack-depth) {
+            $column-selectors: $column-selectors + $selector-separator + _nth-child-hack($item-count + $current, ".column");
+            $nth-child-separator: ",";
+            $item-count: $item-count + $total;
+        }
+        $selector-separator: ",";
+    }
+
+    @return $column-selectors;
+}
