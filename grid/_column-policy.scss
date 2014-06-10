@@ -132,7 +132,7 @@ $column-policy-flag-nth-child-hack-depth: 20 !default;
             $totalFixedWidths: $totalFixedWidths - $columnWidth;
         }
 
-        [data-column~="#{$totalColumns}-#{$columnToDisplay}"] {
+        @include _column($totalColumns, $columnToDisplay) {
             clear: $clear;
             left: $left; 
             margin-left: $margin;
