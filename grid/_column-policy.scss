@@ -141,6 +141,10 @@ $column-policy-flag-use-once: null;
             width: $columnWidth;
         }
     }
+
+    @if ($column-policy-flag-use-once) {
+        @include column-policy-options;
+    }
 }
 
 @mixin _column($total, $current) {
