@@ -1,5 +1,10 @@
 @import "../utilities/_clear-fix";
 
+$column-policy-flag-nth-of-type-support: true !default;
+$column-policy-flag-data-attribute-support: true !default;
+$column-policy-flag-nth-child-hack-support: false !default;
+$column-policy-flag-nth-child-hack-depth: 20 !default;
+
 //
 // Defines styles for all columns.
 //
