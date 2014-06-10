@@ -141,6 +141,14 @@ $column-policy-flag-nth-child-hack-depth: 20 !default;
     }
 }
 
+@mixin _column($total, $current) {
+    $column-selectors: _column-selectors($total, $current);
+
+    #{$column-selectors} {
+        @content;
+    }
+}
+
 @function _column-selectors($total, $current) {
     $column-selectors: "";
     $selector-separator: "";
