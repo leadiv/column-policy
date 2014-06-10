@@ -167,3 +167,14 @@ $column-policy-flag-nth-child-hack-depth: 20 !default;
 
     @return $column-selectors;
 }
+
+@function _nth-child-hack($number, $element) {
+    $selector: $element + ":first-child";
+    $minimum: 2;
+
+    @for $i from $minimum through $number {
+        $selector: $selector + " + " + $element;
+    }
+
+    @return $selector;
+}
