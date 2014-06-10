@@ -186,3 +186,11 @@ $column-policy-flag-nth-child-hack-depth: 20 !default;
 
     @return $selector;
 }
+
+@mixin column-policy-options($use-nth-of-type:true, $use-data-attribute:false, $use-nth-child-hack:false, $set-nth-child-hack-depth:20, $use-once:false) {
+    $column-policy-flag-nth-of-type-support: $use-nth-of-type;
+    $column-policy-flag-data-attribute-support: $use-data-attribute;
+    $column-policy-flag-nth-child-hack-support: $use-nth-child-hack;
+    $column-policy-flag-nth-child-hack-depth: $set-nth-child-hack-depth;
+    $column-policy-flag-use-once: $use-once;
+}
