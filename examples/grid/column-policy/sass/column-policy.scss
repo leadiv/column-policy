@@ -1,4 +1,5 @@
 @import "sass-mixins/grid/_column-policy";
+@include column-policy-options($column-padding:20px);
 
 $max-content-width: 14 * 80px;
 $large-size: 13 * 80px;
@@ -17,32 +18,10 @@ body {
 .page {
     @media (min-width: $medium-size) {
         @include column-policy(50%, 50%);
-
-        [data-column~="2-1"] .module {
-            padding-right: $gutter / 2;
-        }
-
-        [data-column~="2-2"] .module {
-            padding-left: $gutter / 2;
-        }
     }
 
     @media (min-width: $large-size) {
         @include column-policy($fixed-width-column, 100%, $fixed-width-column);
-
-        [data-column] .module {
-            padding: 0 $gutter - (($gutter * 2) / 3);
-        }
-
-        [data-column~="3-1"] .module {
-            padding-left: 0;
-            padding-right: ($gutter * 2) / 3;
-        }
-
-        [data-column~="3-3"] .module {
-            padding-left: ($gutter * 2) / 3;
-            padding-right: 0;
-        }
     }
 }
 
