@@ -1,21 +1,23 @@
-/* line 6, ../sass/sass-mixins/grid/_column-policy.scss */
+/* line 48, ../sass/sass-mixins/grid/_column-policy-private.scss */
+.column,
 [data-column] {
   float: left;
   position: relative;
+  box-sizing: border-box;
 }
 
-/* line 9, ../sass/column-policy.scss */
+/* line 11, ../sass/column-policy.scss */
 * {
   box-sizing: border-box;
 }
 
-/* line 13, ../sass/column-policy.scss */
+/* line 15, ../sass/column-policy.scss */
 body {
   margin: 0;
 }
 
 @media (min-width: 720px) {
-  /* line 79, ../sass/sass-mixins/grid/_column-policy.scss */
+  /* line 150, ../sass/sass-mixins/grid/_column-policy.scss */
   .page {
     padding-left: 0;
   }
@@ -32,31 +34,27 @@ body {
   .page {
     *zoom: 1;
   }
-  /* line 130, ../sass/sass-mixins/grid/_column-policy.scss */
-  .page [data-column~="2-1"] {
+  /* line 70, ../sass/sass-mixins/grid/_column-policy-private.scss */
+  .page > .column:nth-of-type(2n+1) {
     clear: left;
     left: 0;
     margin-left: 0;
     width: 50%;
+    padding-left: 0;
+    padding-right: 10px;
   }
-  /* line 130, ../sass/sass-mixins/grid/_column-policy.scss */
-  .page [data-column~="2-2"] {
+  /* line 70, ../sass/sass-mixins/grid/_column-policy-private.scss */
+  .page > .column:nth-of-type(2n+2) {
     clear: right;
     left: 0;
     margin-left: 0;
     width: 50%;
-  }
-  /* line 21, ../sass/column-policy.scss */
-  .page [data-column~="2-1"] .module {
-    padding-right: 10px;
-  }
-  /* line 25, ../sass/column-policy.scss */
-  .page [data-column~="2-2"] .module {
     padding-left: 10px;
+    padding-right: 0;
   }
 }
 @media (min-width: 1040px) {
-  /* line 79, ../sass/sass-mixins/grid/_column-policy.scss */
+  /* line 150, ../sass/sass-mixins/grid/_column-policy.scss */
   .page {
     padding-left: 640px;
   }
@@ -73,50 +71,42 @@ body {
   .page {
     *zoom: 1;
   }
-  /* line 130, ../sass/sass-mixins/grid/_column-policy.scss */
-  .page [data-column~="3-1"] {
+  /* line 70, ../sass/sass-mixins/grid/_column-policy-private.scss */
+  .page > .column:nth-of-type(3n+1), .page .column:first-child, .page .column:first-child + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column {
     clear: left;
     left: 0;
     margin-left: -640px;
     width: 320px;
+    padding-left: 0;
+    padding-right: 13.33333px;
   }
-  /* line 130, ../sass/sass-mixins/grid/_column-policy.scss */
-  .page [data-column~="3-2"] {
+  /* line 70, ../sass/sass-mixins/grid/_column-policy-private.scss */
+  .page > .column:nth-of-type(3n+2), .page .column:first-child + .column, .page .column:first-child + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column {
     clear: none;
     left: -320px;
     margin-left: 0;
     width: 100%;
+    padding-left: 10px;
+    padding-right: 6.66667px;
   }
-  /* line 130, ../sass/sass-mixins/grid/_column-policy.scss */
-  .page [data-column~="3-3"] {
+  /* line 70, ../sass/sass-mixins/grid/_column-policy-private.scss */
+  .page > .column:nth-of-type(3n+3), .page .column:first-child + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column {
     clear: right;
     left: 0%;
     margin-left: -320px;
     width: 320px;
-  }
-  /* line 33, ../sass/column-policy.scss */
-  .page [data-column] .module {
-    padding: 0 6.66667px;
-  }
-  /* line 37, ../sass/column-policy.scss */
-  .page [data-column~="3-1"] .module {
-    padding-left: 0;
-    padding-right: 13.33333px;
-  }
-  /* line 42, ../sass/column-policy.scss */
-  .page [data-column~="3-3"] .module {
     padding-left: 13.33333px;
     padding-right: 0;
   }
 }
 
-/* line 49, ../sass/column-policy.scss */
+/* line 30, ../sass/column-policy.scss */
 .page-padding {
   margin: 0 20px;
   max-width: 1100px;
 }
 @media (min-width: 1140px) {
-  /* line 49, ../sass/column-policy.scss */
+  /* line 30, ../sass/column-policy.scss */
   .page-padding {
     margin: 0 auto;
   }
