@@ -1,5 +1,6 @@
 @import "sass-mixins/grid/_column-policy";
-@include column-policy-options($column-padding:20px);
+@include column-policy-options($use-nth-of-type:true, $use-data-attribute:false, $column-padding:20px);
+@include column-policy-base;
 
 $max-content-width: 14 * 80px;
 $large-size: 13 * 80px;
