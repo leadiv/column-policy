@@ -1,19 +1,9 @@
+//
+// This forms the public API for the column-policy functionality.
+//
+
 @import "../utilities/_clear-fix";
-
-$column-policy-flag-nth-of-type-support: null;
-$column-policy-flag-data-attribute-support: null;
-$column-policy-flag-nth-child-hack-support: null;
-$column-policy-flag-nth-child-hack-depth: null;
-$column-policy-flag-use-once: null;
-
-//
-// Defines styles for all columns.
-//
-.column,
-[data-column] {
-    float: left;
-    position: relative;
-}
+@import "_column-policy-private";
 
 //
 // This mixin generates styles for the column block. It deines how each
@@ -122,9 +112,19 @@ $column-policy-flag-use-once: null;
 //         }
 //     }
 //
+// @access public
+// @param number with unit $columnWidths: The width of each column in
+// the layout. This can either be a percentage or a hard value like pixels.
+//
 @mixin column-policy($columnWidths...) {
     $totalColumns: length($columnWidths);
     $fixedWidths: 0;
+
+    //
+    // Display the default styles for all columns if they have not been
+    // generated yet.
+    //
+    @include _column-policy-common-styles;
 
     //
     // Cacluate the correct padding needed based on the total fixed
@@ -153,6 +153,11 @@ $column-policy-flag-use-once: null;
         $columnWidth: nth($columnWidths, $columnToDisplay);
         $left: null;
         $margin: null;
+        $column-padding: null;
+
+        @if ($column-policy-flag-column-padding != 0) {
+            $column-padding: _column-policy-get-padding($columnToDisplay, $totalColumns);
+        }
 
         @if ($columnToDisplay == 1) {
             $clear: left;
@@ -189,106 +194,70 @@ $column-policy-flag-use-once: null;
             $totalFixedWidths: $totalFixedWidths - $columnWidth;
         }
 
-        @include _column($totalColumns, $columnToDisplay) {
+        @include _column-policy-column($totalColumns, $columnToDisplay) {
             clear: $clear;
             left: $left; 
             margin-left: $margin;
             width: $columnWidth;
+            @if ($column-padding != null) {
+                padding-left: nth($column-padding, 1);
+                padding-right: nth($column-padding, 2);
+            }
         }
     }
 
-    @if ($column-policy-flag-use-once) {
-        @include column-policy-options;
-    }
+    @include column-policy-options;
 }
 
 //
-// Writes out the styles needed for a specific column given the approach to use from the global flags.
-//
-// @access private
-// @param number $total: (required) The total number of columns.
-// @param number $current: (requried) The current column that the styles are to be applied.
-//
-@mixin _column($total, $current) {
-    $column-selectors: _column-selectors($total, $current);
-
-    #{$column-selectors} {
-        @content;
-    }
-}
-
-//
-// Generates the list of css selectors as a string to be applied to the column styles.
-// Each selector generated is separated by a comma.
-//
-// @access private
-// @param number $total: (required) The total number of columns that the selectors should use as a context.
-// @param number $current: (required) The current column that the selectors should use as its context.
-// @returns: A string with all the selectors generated.
-//
-@function _column-selectors($total, $current) {
-    $column-selectors: "";
-    $selector-separator: "";
-    $item-count: 0;
-
-    @if ($column-policy-flag-data-attribute-support) {
-        $column-selectors: $column-selectors + $selector-separator + '[data-column~="' + $total + "-" + $current + '"]';
-        $selector-separator: ",";
-    }
-
-    @if ($column-policy-flag-nth-of-type-support) {
-        $column-selectors: $column-selectors + $selector-separator + "> .column:nth-of-type(" + $total + "n+" + $current + ")";
-        $selector-separator: ",";
-    }
-
-    @if ($column-policy-flag-nth-child-hack-support) {
-        @while ($item-count < $column-policy-flag-nth-child-hack-depth) {
-            $column-selectors: $column-selectors + $selector-separator + _nth-child-hack($item-count + $current, ".column");
-            $nth-child-separator: ",";
-            $item-count: $item-count + $total;
-        }
-        $selector-separator: ",";
-    }
-
-    @return $column-selectors;
-}
-
-//
-// Emulates nth-child with css styles.
-//
-// @access private
-// @param number $number: (required) The child count of which item to select. Any number lower then 1 will return a first-child selector.
-// @param string $element: (required) The element selector to use. This could be a class name or element tag but needs to be kept simple.
-// @returns: The selector as a string.
-//
-@function _nth-child-hack($number, $element) {
-    $selector: $element + ":first-child";
-    $minimum: 2;
-
-    @for $i from $minimum through $number {
-        $selector: $selector + " + " + $element;
-    }
-
-    @return $selector;
-}
-
-//
-// Sets the global options for column policy processing or resets the global options to the defaults.
+// Sets the global options for column policy processing or resets the
+// global options to the defaults.
 //
 // @access public
-// @param boolean $use-nth-of-type: (optional) If true then styles using nth-of-type will be generated to create the columns.
-// @param boolean $use-data-attribute: (optional) If true then styles using data-column will be generated to create the columns.
-// @param boolean $use-nth-child-hack: (optional) If true then styles using the adjcent selector (+) and first-child will be generated to create the columns. This is really only for browsers that are unable to use nth-child.
-// @param number $set-nth-child-hack-depth: (optional) The max items that will be considered when using the nth-child-hack option. Any items after will not be put in a column but use the default styling only for all columns.
-// @param boolean $use-once: (optional) If true then the custom options set will only be used on the next call to column-policy all calls afterward will use the default options as first defined by the library.
+// @param boolean $use-nth-of-type: (optional) If true then styles using
+// nth-of-type will be generated to create the columns.
+// @param boolean $use-data-attribute: (optional) If true then styles
+// using data-column will be generated to create the columns.
+// @param boolean $use-nth-child-hack: (optional) If true then styles
+// using the adjcent selector (+) and first-child will be generated to
+// create the columns. This is really only for browsers that are unable
+// to use nth-child.
+// @param number $set-nth-child-hack-depth: (optional) The max items
+// that will be considered when using the nth-child-hack option. Any
+// items after will not be put in a column but use the default styling
+// only for all columns.
+// @param boolean $use-once: (optional) If true then the custom options
+// set will only be used on the next call to column-policy all calls
+// afterward will use the default options as first defined by the
+// library.
 // @returns: Boolean true.
 //
-@mixin column-policy-options($use-nth-of-type:true, $use-data-attribute:false, $use-nth-child-hack:false, $set-nth-child-hack-depth:20, $use-once:false) {
-    $column-policy-flag-nth-of-type-support: $use-nth-of-type;
+@mixin column-policy-options(
+    $use-nth-of-type:          $column-policy-default-flag-nth-of-type-support,
+    $use-data-attribute:       $column-policy-default-flag-data-attribute-support,
+    $use-nth-child-hack:       $column-policy-default-flag-nth-child-hack-support,
+    $set-nth-child-hack-depth: $column-policy-default-flag-nth-child-hack-depth,
+    $column-padding:           $column-policy-default-flag-column-padding,
+    $use-once:                 $column-policy-default-flag-use-once
+) {
+
+    @if (not $use-once) {
+        @include _column-policy-set-factory-settings(
+            $use-nth-of-type,
+            $use-data-attribute,
+            $use-nth-child-hack,
+            $set-nth-child-hack-depth,
+            $column-padding,
+            $use-once
+        );
+    }
+
+    $column-policy-flag-nth-of-type-support:    $use-nth-of-type;
     $column-policy-flag-data-attribute-support: $use-data-attribute;
     $column-policy-flag-nth-child-hack-support: $use-nth-child-hack;
-    $column-policy-flag-nth-child-hack-depth: $set-nth-child-hack-depth;
-    $column-policy-flag-use-once: $use-once;
+    $column-policy-flag-nth-child-hack-depth:   $set-nth-child-hack-depth;
+    $column-policy-flag-column-padding:         $column-padding;
+    $column-policy-flag-use-once:               $use-once;
 }
 
 //
