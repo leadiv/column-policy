@@ -6,6 +6,18 @@
 @import "_column-policy-private";
 
 //
+// Display the default styles for all columns if they have not been
+// generated yet. Allows base styling to be applied outside of media
+// queries if the first call is in a media query.
+//
+// This should be marked as deprecated once sass 3.3 is supported
+// and be moved back into column-policy.
+//
+@mixin column-policy-base {
+    @include _column-policy-common-styles;
+}
+
+//
 // This mixin generates styles for the column block. It deines how each
 // column should act (fixed vs. fluid). There are two main approaches 
 // that can be taken when creating columns: dynamic and static. Dynamic
