@@ -101,10 +101,9 @@ $column-policy-internal-first-use: true !default;
     @if ($column-policy-flag-nth-child-hack-support) {
         @while ($item-count < $column-policy-flag-nth-child-hack-depth) {
             $column-selectors: $column-selectors + $selector-separator + _column-policy-nth-child-hack($item-count + $current, ".column");
-            $nth-child-separator: ",";
+            $selector-separator: ",";
             $item-count: $item-count + $total;
         }
-        $selector-separator: ",";
     }
 
     @return $column-selectors;
