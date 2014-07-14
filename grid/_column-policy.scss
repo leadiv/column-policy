@@ -165,11 +165,6 @@
         $columnWidth: nth($columnWidths, $columnToDisplay);
         $left: null;
         $margin: null;
-        $column-padding: null;
-
-        @if ($column-policy-flag-column-padding != 0) {
-            $column-padding: _column-policy-get-padding($columnToDisplay, $totalColumns);
-        }
 
         @if ($columnToDisplay == 1) {
             $clear: left;
@@ -211,10 +206,8 @@
             left: $left; 
             margin-left: $margin;
             width: $columnWidth;
-            @if ($column-padding != null) {
-                padding-left: nth($column-padding, 1);
-                padding-right: nth($column-padding, 2);
-            }
+
+            @include _column-policy-column-padding($columnToDisplay - 1, $totalColumns);
         }
     }
 
