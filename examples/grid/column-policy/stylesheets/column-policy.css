@@ -1,4 +1,4 @@
-/* line 48, ../sass/sass-mixins/grid/_column-policy-private.scss */
+/* line 60, ../sass/sass-mixins/grid/_column-policy-private.scss */
 .column,
 [data-column] {
   float: left;
@@ -17,7 +17,7 @@ body {
 }
 
 @media (min-width: 720px) {
-  /* line 150, ../sass/sass-mixins/grid/_column-policy.scss */
+  /* line 153, ../sass/sass-mixins/grid/_column-policy.scss */
   .page {
     padding-left: 0;
   }
@@ -34,27 +34,27 @@ body {
   .page {
     *zoom: 1;
   }
-  /* line 70, ../sass/sass-mixins/grid/_column-policy-private.scss */
+  /* line 82, ../sass/sass-mixins/grid/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+1) {
     clear: left;
     left: 0;
     margin-left: 0;
     width: 50%;
-    padding-left: 0;
+    padding-left: 0px;
     padding-right: 10px;
   }
-  /* line 70, ../sass/sass-mixins/grid/_column-policy-private.scss */
+  /* line 82, ../sass/sass-mixins/grid/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+2) {
     clear: right;
     left: 0;
     margin-left: 0;
     width: 50%;
     padding-left: 10px;
-    padding-right: 0;
+    padding-right: 0px;
   }
 }
 @media (min-width: 1040px) {
-  /* line 150, ../sass/sass-mixins/grid/_column-policy.scss */
+  /* line 153, ../sass/sass-mixins/grid/_column-policy.scss */
   .page {
     padding-left: 640px;
   }
@@ -71,32 +71,32 @@ body {
   .page {
     *zoom: 1;
   }
-  /* line 70, ../sass/sass-mixins/grid/_column-policy-private.scss */
+  /* line 82, ../sass/sass-mixins/grid/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+1), .page .column:first-child, .page .column:first-child + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column {
     clear: left;
     left: 0;
     margin-left: -640px;
     width: 320px;
-    padding-left: 0;
+    padding-left: 0px;
     padding-right: 13.33333px;
   }
-  /* line 70, ../sass/sass-mixins/grid/_column-policy-private.scss */
+  /* line 82, ../sass/sass-mixins/grid/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+2), .page .column:first-child + .column, .page .column:first-child + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column {
     clear: none;
     left: -320px;
     margin-left: 0;
     width: 100%;
-    padding-left: 10px;
+    padding-left: 6.66667px;
     padding-right: 6.66667px;
   }
-  /* line 70, ../sass/sass-mixins/grid/_column-policy-private.scss */
+  /* line 82, ../sass/sass-mixins/grid/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+3), .page .column:first-child + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column {
     clear: right;
     left: 0%;
     margin-left: -320px;
     width: 320px;
     padding-left: 13.33333px;
-    padding-right: 0;
+    padding-right: 0px;
   }
 }
 
