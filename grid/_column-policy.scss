@@ -130,7 +130,7 @@
 //
 @mixin column-policy($columnWidths...) {
     $totalColumns: length($columnWidths);
-    $fixedWidths: 0;
+    $fixedWidths: 0px;
 
     //
     // Display the default styles for all columns if they have not been
@@ -152,19 +152,16 @@
 
     & {
         @include clear-fix;
-        padding-left: $fixedWidths;
+        overflow: hidden;
     }
 
     //
     // Determine the left and left-margin to generate for each column.
     //
-    $totalFixedWidths: $fixedWidths;
-    $totalPercentageWidths: null;
     @for $columnToDisplay from 1 to $totalColumns + 1 {
         $clear: none;
         $columnWidth: nth($columnWidths, $columnToDisplay);
-        $left: null;
-        $margin: null;
+        $fluid-negative-space: 0;
 
         @if ($columnToDisplay == 1) {
             $clear: left;
@@ -182,32 +179,21 @@
         // get the margin-left property modified.
         //
         @if (unit($columnWidth) == "%") {
-            $margin: 0;
-            $left: -$totalFixedWidths;
-
-            @if ($totalPercentageWidths == null) {
-                $totalPercentageWidths: 100%;
-            }
-
-            $totalPercentageWidths: $totalPercentageWidths - $columnWidth;
-        } @else {
-            $margin: -$totalFixedWidths;
-            $left: -$totalPercentageWidths;
-
-            @if ($totalPercentageWidths == null) {
-                $left: 0;
-            }
-
-            $totalFixedWidths: $totalFixedWidths - $columnWidth;
+            $fluid-negative-space: $fixedWidths * ($columnWidth / 100%);
         }
 
         @include _column-policy-column($totalColumns, $columnToDisplay) {
             clear: $clear;
-            left: $left; 
-            margin-left: $margin;
+            margin-right: -$fluid-negative-space;
+            //
+            // This is used to push the fluid content into the right spot.
+            // If padding is present then the padding is added to the column
+            // padding as well and this value gets overwritten.
+            //
+            padding-right: $fluid-negative-space; 
             width: $columnWidth;
 
-            @include _column-policy-column-padding($columnToDisplay - 1, $totalColumns);
+            @include _column-policy-column-padding($columnToDisplay - 1, $totalColumns, $fluid-negative-space);
         }
     }
 
