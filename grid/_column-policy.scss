@@ -156,7 +156,7 @@
     }
 
     //
-    // Determine the left and left-margin to generate for each column.
+    // Determine the margin-right and padding-right to generate for each fluid column.
     //
     @for $columnToDisplay from 1 to $totalColumns + 1 {
         $clear: none;
@@ -172,11 +172,13 @@
         }
 
         //
-        // Fluid and fixed columns are treated differently. Fluid
-        // columns get the left property modified this way the column
-        // following the fluid column does not need to calculate the
-        // fluid width when trying to move into place. Fixed columns
-        // get the margin-left property modified.
+        // Each fluid column gets a percentage of the fixed width so that it
+        // can make room on the row. So if the column is at 60% then 60% of
+        // the calculated fixed with is applied to the column's margin and
+        // padding.
+        // The padding will push the content of the column visually while
+        // the negative margin will allow for the next column block to pull
+        // itself so it visually is right next to the column.
         //
         @if (unit($columnWidth) == "%") {
             $fluid-negative-space: $fixedWidths * ($columnWidth / 100%);
