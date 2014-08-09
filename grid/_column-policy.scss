@@ -1,8 +1,7 @@
 //
 // This forms the public API for the column-policy functionality.
 //
-
-@import "../utilities/_clear-fix";
+@import "compass/utilities/general/clearfix";
 @import "_column-policy-private";
 
 //
@@ -151,7 +150,7 @@
     }
 
     & {
-        @include clear-fix;
+        @include clearfix;
         padding-left: $fixedWidths;
     }
 
