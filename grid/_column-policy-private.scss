@@ -73,6 +73,42 @@ $column-policy-internal-first-use: true !default;
 }
 
 //
+// Generates the padding left and right for each column.
+// The padding generated is intended to be evenly distributed between
+// all the columns. The padding is calcuated in terms of the interval
+// and gutter values. @see _column-policy-padding-interval for more
+// information on the column interval. The gutter is the same as the
+// global $column-policy-flag-column-padding value. It is the visual
+// spacing that is observed by the user when looking at the spacing
+// between each column.
+// The left padding is the absolute difference of all intervals and
+// gutters before the current column. 
+// The right padding is the difference between intervals before and
+// including the current column and all gutters before the current
+// column.
+//
+// For example if we have an interval of 16.6666667px and gutter of
+// 20px then the 3rd column could be calculated as:
+// intervalForCol1 = intervalForCol2 = intervalForCol3 = 16.6666667px
+// gutterForCol1 = gutterForCol2 = 20px
+// padding-left: abs(((intervalForCol1 - gutterForCol1) + intervalForCol2) - intervalForCol2)
+// padding-right: ((((intervalForCol1 - gutterForCol1) + intervalForCol2) - gutterForCol2) + intervalForCol3);
+//
+// @param number $column: (required) The current index of the column
+// being inspected.
+// @param number $columns: (required) The total number of columns.
+//
+@mixin _column-policy-column-padding($column, $columns) {
+    $gutter: $column-policy-flag-column-padding;
+
+    @if ($gutter != 0) {
+        $interval: _column-policy-padding-interval($columns);
+        padding-left: abs(($column * $interval) - ($column * $gutter));
+        padding-right: (($column + 1) * $interval) - ($column * $gutter);
+    }
+}
+
+//
 // Generates the list of css selectors as a string to be applied to the
 // column styles. Each selector generated is separated by a comma.
 //
@@ -131,67 +167,21 @@ $column-policy-internal-first-use: true !default;
 }
 
 //
-// Returns padding for the left and right side of a column. The padding
-// returned is intended to be evenly distributed between all the
-// columns.
+// Calculates the total padding that each column needs to have when
+// adding the left and right padding. Since there is one less gutter
+// padding then the number of columns then each column will have
+// slightly less padding in order to properly create the columns
+//
+// For example, for four columns with 20px gutters in between each the
+// total amount of padding is 60px (3 * 20px) since the columns share
+// gutter spacing. Then dividing this by the total columns (four in our
+// case) will yield how much padding each column needs. Four this
+// example the padding internval would be 15px for each column.
 //
 // @access private
-// @param number $column: (required) The current column being inspected.
-// @param number $columns: (required) The total number of columns.
-// @returns: A list of two numbers with units. The first is for left and
-// the second is for right.
+// @param number $colums: (required) The total number of colums per row.
+// @returns: The total padding (left and right) that each columns needs.
 //
-@function _column-policy-get-padding($column, $columns) {
-    $left: 0;
-    $right: 0;
-    $endcap-large: (($columns - 1) * $column-policy-flag-column-padding) / $columns;
-    $endcap-small: $column-policy-flag-column-padding - $endcap-large;
-    $internal: $column-policy-flag-column-padding / 2;
-
-    @if ($columns > 1 and $column-policy-flag-column-padding != 0) {
-        //
-        // There are 5 different cases that need to be handled.
-        // Are we the first column, second column, last column, second
-        // to last column or only have two columns in the layout.
-        // These five special cases have different left and right
-        // padding values. All other padding just split the column
-        // padding in half and use that for the padding.
-        //
-        @if ($column == 1) {
-            $right: $endcap-large;
-        }
-
-        @if ($column == 2) {
-            $left: $endcap-small;
-            $right: $internal;
-        }
-
-        @if ($column == $columns) {
-            $left: $endcap-large;
-        }
-
-        @if ($column == $columns - 1) {
-            $left: $internal;
-            $right: $endcap-small;
-        }
-
-        @if ($column > 2 and $column < $columns - 1) {
-            $left: $internal;
-            $right: $internal;
-        }
-
-        @if ($columns == 2) {
-            @if ($column == 1) {
-                $left: 0;
-                $right: $internal;
-            }
-
-            @if ($column == 2) {
-                $left: $internal;
-                $right: 0;
-            }
-        }
-    }
-
-    @return ($left $right);
+@function _column-policy-padding-interval($columns) {
+    @return ($column-policy-flag-column-padding * ($columns - 1)) / $columns;
 }
