@@ -1,0 +1,29 @@
+/* line 48, ../../dist/_column-policy-private.scss */
+.column,
+[data-column] {
+  float: left;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* line 11, ../sass/common.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 15, ../sass/common.scss */
+body {
+  margin: 0;
+}
+
+/* line 19, ../sass/common.scss */
+.page-padding {
+  margin: 0 20px;
+  max-width: 1100px;
+}
+@media (min-width: 1140px) {
+  /* line 19, ../sass/common.scss */
+  .page-padding {
+    margin: 0 auto;
+  }
+}

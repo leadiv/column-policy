@@ -1,0 +1,26 @@
+@import "../../dist/_column-policy";
+@include column-policy-base;
+
+$column-width: 80px;
+$max-content-width: 14 * $column-width;
+$large-size: 13 * $column-width;
+$medium-size: 9 * $column-width;
+$fixed-width-column: 4 * $column-width;
+$gutter: 20px;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.page-padding {
+    margin: 0 $gutter;
+    max-width: $max-content-width - $gutter;
+
+    @media (min-width: $max-content-width + $gutter) {
+        margin: 0 auto;
+    }
+}
