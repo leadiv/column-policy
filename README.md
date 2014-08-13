@@ -1,4 +1,4 @@
-sass-mixins
+column-policy
 ===========
 
-Custom SASS mixins that I find helpful for web development.
+Custom mixin to help with the creation of custom grid layouts.
