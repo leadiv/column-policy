@@ -1,0 +1,12 @@
+@import "_common";
+@include column-policy-options($use-data-attribute:true, $use-nth-of-type:false);
+
+.page {
+    @media (min-width: $medium-size) {
+        @include column-policy(50%, 50%);
+    }
+
+    @media (min-width: $large-size) {
+        @include column-policy($fixed-width-column, 100%, $fixed-width-column);
+    }
+}
