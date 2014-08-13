@@ -1,0 +1,81 @@
+/* line 48, ../../dist/_column-policy-private.scss */
+.column,
+[data-column] {
+  float: left;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* line 11, ../sass/_common.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 15, ../sass/_common.scss */
+body {
+  margin: 0;
+}
+
+/* line 19, ../sass/_common.scss */
+.page-padding {
+  margin: 0 20px;
+  max-width: 1100px;
+}
+@media (min-width: 1140px) {
+  /* line 19, ../sass/_common.scss */
+  .page-padding {
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 720px) {
+  /* line 152, ../../dist/_column-policy.scss */
+  .page {
+    overflow: hidden;
+    *zoom: 1;
+    padding-left: 0;
+  }
+  /* line 70, ../../dist/_column-policy-private.scss */
+  .page [data-column~="2-1"] {
+    clear: left;
+    left: 0;
+    margin-left: 0;
+    width: 50%;
+  }
+  /* line 70, ../../dist/_column-policy-private.scss */
+  .page [data-column~="2-2"] {
+    clear: right;
+    left: 0;
+    margin-left: 0;
+    width: 50%;
+  }
+}
+@media (min-width: 1040px) {
+  /* line 152, ../../dist/_column-policy.scss */
+  .page {
+    overflow: hidden;
+    *zoom: 1;
+    padding-left: 640px;
+  }
+  /* line 70, ../../dist/_column-policy-private.scss */
+  .page [data-column~="3-1"] {
+    clear: left;
+    left: 0;
+    margin-left: -640px;
+    width: 320px;
+  }
+  /* line 70, ../../dist/_column-policy-private.scss */
+  .page [data-column~="3-2"] {
+    clear: none;
+    left: -320px;
+    margin-left: 0;
+    width: 100%;
+  }
+  /* line 70, ../../dist/_column-policy-private.scss */
+  .page [data-column~="3-3"] {
+    clear: right;
+    left: 0%;
+    margin-left: -320px;
+    width: 320px;
+  }
+}

@@ -1,0 +1,6 @@
+@import "_common";
+@include column-policy-options($use-nth-of-type:false, $use-nth-child-hack:true);
+
+.page {
+    @include column-policy($fixed-width-column, 100%, $fixed-width-column);
+}
