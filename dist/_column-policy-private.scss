@@ -98,13 +98,13 @@ $column-policy-internal-first-use: true !default;
 // being inspected.
 // @param number $columns: (required) The total number of columns.
 //
-@mixin _column-policy-column-padding($column, $columns) {
+@mixin _column-policy-column-padding($column, $columns, $fluid-padding: 0px) {
     $gutter: $column-policy-flag-column-padding;
 
     @if ($gutter != 0) {
         $interval: _column-policy-padding-interval($columns);
         padding-left: abs(($column * $interval) - ($column * $gutter));
-        padding-right: (($column + 1) * $interval) - ($column * $gutter);
+        padding-right: (($column + 1) * $interval) - ($column * $gutter) + $fluid-padding;
     }
 }
 
