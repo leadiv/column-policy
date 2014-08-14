@@ -186,20 +186,10 @@
         @include _column-policy-column($totalColumns, $columnToDisplay) {
             clear: $clear;
 
-            @if ($fluid-negative-space != 0) {
-                margin-right: -$fluid-negative-space;
-            } @else {
-                margin-right: $fluid-negative-space;
-            }
-
             //
-            // This is used to push the fluid content into the right spot.
-            // If padding is present then the padding is added to the column
-            // padding as well and this value gets overwritten.
+            // Order is important here. The output of _column-policy-column-width can have a padding which can be overwritten by _column-policy-column-padding
             //
-            padding-right: $fluid-negative-space; 
-            width: $columnWidth;
-
+            @include _column-policy-column-width($columnWidth, $fluid-negative-space);
             @include _column-policy-column-padding($columnToDisplay - 1, $totalColumns, $fluid-negative-space);
         }
     }
@@ -236,6 +226,7 @@
     $use-nth-child-hack:       $column-policy-default-flag-nth-child-hack-support,
     $set-nth-child-hack-depth: $column-policy-default-flag-nth-child-hack-depth,
     $column-padding:           $column-policy-default-flag-column-padding,
+    $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
 ) {
 
@@ -246,6 +237,7 @@
             $use-nth-child-hack,
             $set-nth-child-hack-depth,
             $column-padding,
+            $use-calc,
             $use-once
         );
     }
@@ -255,6 +247,7 @@
     $column-policy-flag-nth-child-hack-support: $use-nth-child-hack;
     $column-policy-flag-nth-child-hack-depth:   $set-nth-child-hack-depth;
     $column-policy-flag-column-padding:         $column-padding;
+    $column-policy-flag-calc-support:           $use-calc;
     $column-policy-flag-use-once:               $use-once;
 }
 
