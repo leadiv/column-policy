@@ -129,7 +129,7 @@
 //
 @mixin column-policy($columnWidths...) {
     $totalColumns: length($columnWidths);
-    $fixedWidths: 0;
+    $fixedWidths: 0px;
 
     //
     // Display the default styles for all columns if they have not been
@@ -151,19 +151,16 @@
 
     & {
         @include clearfix;
-        padding-left: $fixedWidths;
+        overflow: hidden;
     }
 
     //
-    // Determine the left and left-margin to generate for each column.
+    // Determine the margin-right and padding-right to generate for each fluid column.
     //
-    $totalFixedWidths: $fixedWidths;
-    $totalPercentageWidths: null;
     @for $columnToDisplay from 1 to $totalColumns + 1 {
         $clear: none;
         $columnWidth: nth($columnWidths, $columnToDisplay);
-        $left: null;
-        $margin: null;
+        $fluid-negative-space: 0;
 
         @if ($columnToDisplay == 1) {
             $clear: left;
@@ -174,39 +171,36 @@
         }
 
         //
-        // Fluid and fixed columns are treated differently. Fluid
-        // columns get the left property modified this way the column
-        // following the fluid column does not need to calculate the
-        // fluid width when trying to move into place. Fixed columns
-        // get the margin-left property modified.
+        // Each fluid column gets a percentage of the fixed width so that it
+        // can make room on the row. So if the column is at 60% then 60% of
+        // the calculated fixed with is applied to the column's margin and
+        // padding.
+        // The padding will push the content of the column visually while
+        // the negative margin will allow for the next column block to pull
+        // itself so it visually is right next to the column.
         //
         @if (unit($columnWidth) == "%") {
-            $margin: 0;
-            $left: -$totalFixedWidths;
-
-            @if ($totalPercentageWidths == null) {
-                $totalPercentageWidths: 100%;
-            }
-
-            $totalPercentageWidths: $totalPercentageWidths - $columnWidth;
-        } @else {
-            $margin: -$totalFixedWidths;
-            $left: -$totalPercentageWidths;
-
-            @if ($totalPercentageWidths == null) {
-                $left: 0;
-            }
-
-            $totalFixedWidths: $totalFixedWidths - $columnWidth;
+            $fluid-negative-space: $fixedWidths * ($columnWidth / 100%);
         }
 
         @include _column-policy-column($totalColumns, $columnToDisplay) {
             clear: $clear;
-            left: $left; 
-            margin-left: $margin;
+
+            @if ($fluid-negative-space != 0) {
+                margin-right: -$fluid-negative-space;
+            } @else {
+                margin-right: $fluid-negative-space;
+            }
+
+            //
+            // This is used to push the fluid content into the right spot.
+            // If padding is present then the padding is added to the column
+            // padding as well and this value gets overwritten.
+            //
+            padding-right: $fluid-negative-space; 
             width: $columnWidth;
 
-            @include _column-policy-column-padding($columnToDisplay - 1, $totalColumns);
+            @include _column-policy-column-padding($columnToDisplay - 1, $totalColumns, $fluid-negative-space);
         }
     }
 

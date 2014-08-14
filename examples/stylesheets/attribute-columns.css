@@ -33,20 +33,20 @@ body {
   .page {
     overflow: hidden;
     *zoom: 1;
-    padding-left: 0;
+    overflow: hidden;
   }
   /* line 70, ../../dist/_column-policy-private.scss */
   .page [data-column~="2-1"] {
     clear: left;
-    left: 0;
-    margin-left: 0;
+    margin-right: 0px;
+    padding-right: 0px;
     width: 50%;
   }
   /* line 70, ../../dist/_column-policy-private.scss */
   .page [data-column~="2-2"] {
     clear: right;
-    left: 0;
-    margin-left: 0;
+    margin-right: 0px;
+    padding-right: 0px;
     width: 50%;
   }
 }
@@ -55,27 +55,27 @@ body {
   .page {
     overflow: hidden;
     *zoom: 1;
-    padding-left: 640px;
+    overflow: hidden;
   }
   /* line 70, ../../dist/_column-policy-private.scss */
   .page [data-column~="3-1"] {
     clear: left;
-    left: 0;
-    margin-left: -640px;
+    margin-right: 0;
+    padding-right: 0;
     width: 320px;
   }
   /* line 70, ../../dist/_column-policy-private.scss */
   .page [data-column~="3-2"] {
     clear: none;
-    left: -320px;
-    margin-left: 0;
+    margin-right: -640px;
+    padding-right: 640px;
     width: 100%;
   }
   /* line 70, ../../dist/_column-policy-private.scss */
   .page [data-column~="3-3"] {
     clear: right;
-    left: 0%;
-    margin-left: -320px;
+    margin-right: 0;
+    padding-right: 0;
     width: 320px;
   }
 }
