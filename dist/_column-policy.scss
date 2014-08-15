@@ -225,6 +225,7 @@
     $use-data-attribute:       $column-policy-default-flag-data-attribute-support,
     $use-nth-child-hack:       $column-policy-default-flag-nth-child-hack-support,
     $set-nth-child-hack-depth: $column-policy-default-flag-nth-child-hack-depth,
+    $set-nth-child-offset:     $column-policy-default-flag-nth-child-offset,
     $column-padding:           $column-policy-default-flag-column-padding,
     $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
@@ -236,6 +237,7 @@
             $use-data-attribute,
             $use-nth-child-hack,
             $set-nth-child-hack-depth,
+            $set-nth-child-offset,
             $column-padding,
             $use-calc,
             $use-once
@@ -246,6 +248,7 @@
     $column-policy-flag-data-attribute-support: $use-data-attribute;
     $column-policy-flag-nth-child-hack-support: $use-nth-child-hack;
     $column-policy-flag-nth-child-hack-depth:   $set-nth-child-hack-depth;
+    $column-policy-flag-nth-child-offset:       $set-nth-child-offset;
     $column-policy-flag-column-padding:         $column-padding;
     $column-policy-flag-calc-support:           $use-calc;
     $column-policy-flag-use-once:               $use-once;
