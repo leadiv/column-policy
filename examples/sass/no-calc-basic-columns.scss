@@ -1,6 +1,5 @@
-$data-attribute: "col";
 @import "_common";
-@include column-policy-options($use-data-attribute:true, $use-nth-of-type:false);
+@include column-policy-options($use-calc: false);
 
 .page {
     @media (min-width: $medium-size) {

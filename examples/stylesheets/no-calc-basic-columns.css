@@ -1,6 +1,6 @@
 /* line 61, ../../dist/_column-policy-private.scss */
 .column,
-[data-col] {
+[data-column] {
   float: left;
   position: relative;
   box-sizing: border-box;
@@ -36,13 +36,17 @@ body {
     overflow: hidden;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
-  .page [data-col~="2-1"] {
+  .page > .column:nth-of-type(2n+1) {
     clear: left;
+    margin-right: 0px;
+    padding-right: 0px;
     width: 50%;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
-  .page [data-col~="2-2"] {
+  .page > .column:nth-of-type(2n+2) {
     clear: right;
+    margin-right: 0px;
+    padding-right: 0px;
     width: 50%;
   }
 }
@@ -54,18 +58,24 @@ body {
     overflow: hidden;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
-  .page [data-col~="3-1"] {
+  .page > .column:nth-of-type(3n+1) {
     clear: left;
+    margin-right: 0;
+    padding-right: 0;
     width: 320px;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
-  .page [data-col~="3-2"] {
+  .page > .column:nth-of-type(3n+2) {
     clear: none;
-    width: calc(100% - 640px);
+    margin-right: -640px;
+    padding-right: 640px;
+    width: 100%;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
-  .page [data-col~="3-3"] {
+  .page > .column:nth-of-type(3n+3) {
     clear: right;
+    margin-right: 0;
+    padding-right: 0;
     width: 320px;
   }
 }
