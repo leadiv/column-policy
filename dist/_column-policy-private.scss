@@ -11,6 +11,7 @@ $column-policy-default-flag-nth-child-hack-depth: 20;
 $column-policy-default-flag-nth-child-offset: 0;
 $column-policy-default-flag-use-once: false;
 $column-policy-default-flag-column-padding: 0;
+$column-policy-default-flag-calc-support: true;
 
 $column-policy-flag-nth-of-type-support: null;
 $column-policy-flag-data-attribute-support: null;
@@ -19,6 +20,7 @@ $column-policy-flag-nth-child-hack-depth: null;
 $column-policy-flag-nth-child-offset: null;
 $column-policy-flag-use-once: null;
 $column-policy-flag-column-padding: null;
+$column-policy-flag-calc-support: null;
 
 $column-policy-internal-first-use: true !default;
 
@@ -29,6 +31,7 @@ $column-policy-internal-first-use: true !default;
     $set-nth-child-hack-depth: $column-policy-default-flag-nth-child-hack-depth,
     $set-nth-child-offset:     $column-policy-default-flag-nth-child-offset,
     $column-padding:           $column-policy-default-flag-column-padding,
+    $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
 ) {
     $column-policy-default-flag-nth-of-type-support:    $use-nth-of-type;
@@ -38,6 +41,7 @@ $column-policy-internal-first-use: true !default;
     $column-policy-default-flag-nth-child-offset:       $set-nth-child-offset;
     $column-policy-default-flag-use-once:               $use-once;
     $column-policy-default-flag-column-padding:         $column-padding;
+    $column-policy-default-flag-calc-support:           $use-calc;
 }
 
 //
@@ -109,6 +113,39 @@ $column-policy-internal-first-use: true !default;
         $interval: _column-policy-padding-interval($columns);
         padding-left: abs(($column * $interval) - ($column * $gutter));
         padding-right: (($column + 1) * $interval) - ($column * $gutter) + $fluid-padding;
+    }
+}
+
+//
+// Generates the width for the column with any modifications needed to the width.
+// For fluid column blocks the width of the block needs to be offset by a percentage
+// of the total fixed width in the row. This allows all the columns to align on the
+// same row.
+//
+// @param number $width: (required) The original width of the column.
+// @param number $offset: (optional) The amount of pixels to decrease the width of the column.
+//
+@mixin _column-policy-column-width($width, $offset: 0) {
+    @if ($column-policy-flag-calc-support) {
+        @if ($offset == 0) {
+            width: $width;
+        } @else {
+            width: calc(#{$width} - #{$offset});
+        }
+    } @else {
+        @if ($offset == 0) {
+            margin-right: $offset;
+        } @else {
+            margin-right: -$offset;
+        }
+
+        //
+        // This is used to push the fluid content into the right spot.
+        // If padding is present then the padding is added to the column
+        // padding as well and this value gets overwritten.
+        //
+        padding-right: $offset; 
+        width: $width;
     }
 }
 

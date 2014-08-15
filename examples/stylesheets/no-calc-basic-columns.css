@@ -38,11 +38,15 @@ body {
   /* line 74, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+1) {
     clear: left;
+    margin-right: 0px;
+    padding-right: 0px;
     width: 50%;
   }
   /* line 74, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+2) {
     clear: right;
+    margin-right: 0px;
+    padding-right: 0px;
     width: 50%;
   }
 }
@@ -56,16 +60,22 @@ body {
   /* line 74, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+1) {
     clear: left;
+    margin-right: 0;
+    padding-right: 0;
     width: 320px;
   }
   /* line 74, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+2) {
     clear: none;
-    width: calc(100% - 640px);
+    margin-right: -640px;
+    padding-right: 640px;
+    width: 100%;
   }
   /* line 74, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+3) {
     clear: right;
+    margin-right: 0;
+    padding-right: 0;
     width: 320px;
   }
 }
