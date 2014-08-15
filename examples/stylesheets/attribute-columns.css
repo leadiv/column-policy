@@ -1,4 +1,4 @@
-/* line 52, ../../dist/_column-policy-private.scss */
+/* line 61, ../../dist/_column-policy-private.scss */
 .column,
 [data-column] {
   float: left;
@@ -6,64 +6,64 @@
   box-sizing: border-box;
 }
 
-/* line 11, ../sass/_common.scss */
+/* line 13, ../sass/_common.scss */
 * {
   box-sizing: border-box;
 }
 
-/* line 15, ../sass/_common.scss */
+/* line 17, ../sass/_common.scss */
 body {
   margin: 0;
 }
 
-/* line 19, ../sass/_common.scss */
+/* line 21, ../sass/_common.scss */
 .page-padding {
   margin: 0 20px;
   max-width: 1100px;
 }
 @media (min-width: 1140px) {
-  /* line 19, ../sass/_common.scss */
+  /* line 21, ../sass/_common.scss */
   .page-padding {
     margin: 0 auto;
   }
 }
 
 @media (min-width: 720px) {
-  /* line 152, ../../dist/_column-policy.scss */
+  /* line 157, ../../dist/_column-policy.scss */
   .page {
     overflow: hidden;
     *zoom: 1;
     overflow: hidden;
   }
-  /* line 74, ../../dist/_column-policy-private.scss */
+  /* line 83, ../../dist/_column-policy-private.scss */
   .page [data-column~="2-1"] {
     clear: left;
     width: 50%;
   }
-  /* line 74, ../../dist/_column-policy-private.scss */
+  /* line 83, ../../dist/_column-policy-private.scss */
   .page [data-column~="2-2"] {
     clear: right;
     width: 50%;
   }
 }
 @media (min-width: 1040px) {
-  /* line 152, ../../dist/_column-policy.scss */
+  /* line 157, ../../dist/_column-policy.scss */
   .page {
     overflow: hidden;
     *zoom: 1;
     overflow: hidden;
   }
-  /* line 74, ../../dist/_column-policy-private.scss */
+  /* line 83, ../../dist/_column-policy-private.scss */
   .page [data-column~="3-1"] {
     clear: left;
     width: 320px;
   }
-  /* line 74, ../../dist/_column-policy-private.scss */
+  /* line 83, ../../dist/_column-policy-private.scss */
   .page [data-column~="3-2"] {
     clear: none;
     width: calc(100% - 640px);
   }
-  /* line 74, ../../dist/_column-policy-private.scss */
+  /* line 83, ../../dist/_column-policy-private.scss */
   .page [data-column~="3-3"] {
     clear: right;
     width: 320px;
