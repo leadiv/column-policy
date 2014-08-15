@@ -1,5 +1,7 @@
+$classname: "column" !default;
+$data-attribute: "column" !default;
 @import "../../dist/_column-policy";
-@include column-policy-base;
+@include column-policy-base($classname, $data-attribute);
 
 $column-width: 80px;
 $max-content-width: 14 * $column-width;

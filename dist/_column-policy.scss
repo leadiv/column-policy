@@ -8,11 +8,16 @@
 // Display the default styles for all columns if they have not been
 // generated yet. Allows base styling to be applied outside of media
 // queries if the first call is in a media query.
+// Sets the class name and data attribute name to be used globally 
+// by the mixin.
 //
-// This should be marked as deprecated once sass 3.3 is supported
-// and be moved back into column-policy.
+// @param string $classname - The name of the class to use.
+// @param string $data-attribute - The name of the data attribute to use. The name does not have the data- prefix on it. That gets added by the mixin.
 //
-@mixin column-policy-base {
+@mixin column-policy-base($classname: $column-policy-internal-class-name, $data-attribute: $column-policy-internal-attribute-name) {
+    $column-policy-internal-class-name: $classname;
+    $column-policy-internal-attribute-name: $data-attribute;
+
     @include _column-policy-common-styles;
 }
 

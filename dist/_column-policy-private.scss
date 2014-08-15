@@ -23,6 +23,8 @@ $column-policy-flag-column-padding: null;
 $column-policy-flag-calc-support: null;
 
 $column-policy-internal-first-use: true !default;
+$column-policy-internal-class-name: "column" !default;
+$column-policy-internal-attribute-name: "column" !default;
 
 @mixin _column-policy-set-factory-settings(
     $use-nth-of-type:          $column-policy-default-flag-nth-of-type-support,
@@ -51,9 +53,12 @@ $column-policy-internal-first-use: true !default;
 // @access private
 //
 @mixin _column-policy-common-styles {
+    $classname: $column-policy-internal-class-name;
+    $data-attribute: $column-policy-internal-attribute-name;
+
     @if ($column-policy-internal-first-use) {
-        .column,
-        [data-column] {
+        .#{$classname},
+        [data-#{$data-attribute}] {
             float: left;
             position: relative;
             box-sizing: border-box;
@@ -161,24 +166,26 @@ $column-policy-internal-first-use: true !default;
 // @returns: A string with all the selectors generated.
 //
 @function _column-policy-column-selectors($total, $current) {
+    $classname: $column-policy-internal-class-name;
+    $data-attribute: $column-policy-internal-attribute-name;
     $column-selectors: "";
     $selector-separator: "";
     $item-count: 0;
     $offset: $column-policy-flag-nth-child-offset;
 
     @if ($column-policy-flag-data-attribute-support) {
-        $column-selectors: $column-selectors + $selector-separator + '[data-column~="' + $total + "-" + $current + '"]';
+        $column-selectors: $column-selectors + $selector-separator + '[data-' + $data-attribute + '~="' + $total + "-" + $current + '"]';
         $selector-separator: ",";
     }
 
     @if ($column-policy-flag-nth-of-type-support) {
-        $column-selectors: $column-selectors + $selector-separator + "> .column:nth-of-type(" + $total + "n+" + ($current + $offset) + ")";
+        $column-selectors: $column-selectors + $selector-separator + "> ." + $classname + ":nth-of-type(" + $total + "n+" + ($current + $offset) + ")";
         $selector-separator: ",";
     }
 
     @if ($column-policy-flag-nth-child-hack-support) {
         @while ($item-count < $column-policy-flag-nth-child-hack-depth) {
-            $column-selectors: $column-selectors + $selector-separator + _column-policy-nth-child-hack($item-count + $current + $offset, ".column");
+            $column-selectors: $column-selectors + $selector-separator + _column-policy-nth-child-hack($item-count + $current + $offset, "." + $classname);
             $selector-separator: ",";
             $item-count: $item-count + $total;
         }
