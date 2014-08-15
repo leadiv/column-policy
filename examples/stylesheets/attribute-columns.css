@@ -1,6 +1,6 @@
 /* line 61, ../../dist/_column-policy-private.scss */
 .column,
-[data-column] {
+[data-col] {
   float: left;
   position: relative;
   box-sizing: border-box;
@@ -36,12 +36,12 @@ body {
     overflow: hidden;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
-  .page [data-column~="2-1"] {
+  .page [data-col~="2-1"] {
     clear: left;
     width: 50%;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
-  .page [data-column~="2-2"] {
+  .page [data-col~="2-2"] {
     clear: right;
     width: 50%;
   }
@@ -54,17 +54,17 @@ body {
     overflow: hidden;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
-  .page [data-column~="3-1"] {
+  .page [data-col~="3-1"] {
     clear: left;
     width: 320px;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
-  .page [data-column~="3-2"] {
+  .page [data-col~="3-2"] {
     clear: none;
     width: calc(100% - 640px);
   }
   /* line 83, ../../dist/_column-policy-private.scss */
-  .page [data-column~="3-3"] {
+  .page [data-col~="3-3"] {
     clear: right;
     width: 320px;
   }

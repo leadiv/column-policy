@@ -1,3 +1,4 @@
+$data-attribute: "col";
 @import "_common";
 @include column-policy-options($use-data-attribute:true, $use-nth-of-type:false);
 
