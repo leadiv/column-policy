@@ -33,7 +33,6 @@ body {
   .page {
     overflow: hidden;
     *zoom: 1;
-    overflow: hidden;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
   .page [data-col~="2-1"] {
@@ -51,7 +50,6 @@ body {
   .page {
     overflow: hidden;
     *zoom: 1;
-    overflow: hidden;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
   .page [data-col~="3-1"] {
