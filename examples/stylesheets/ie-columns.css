@@ -32,7 +32,6 @@ body {
 .page {
   overflow: hidden;
   *zoom: 1;
-  overflow: hidden;
 }
 /* line 83, ../../dist/_column-policy-private.scss */
 .page .column:first-child, .page .column:first-child + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column {

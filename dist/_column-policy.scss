@@ -155,10 +155,6 @@
     }
 
     & {
-        @if ($column-policy-flag-calc-support != true) {
-            overflow: hidden;
-        }
-
         @include clearfix;
     }
 
