@@ -7,9 +7,9 @@
 
     @media (min-width: $large-size) {
         @include column-policy(100%, $fixed-width-column);
-        @include column-policy-options($set-nth-child-offset: 2, $use-once: true);
+        @include column-policy-options-once($set-nth-child-offset: 2);
         @include column-policy($fixed-width-column, 100%, $fixed-width-column);
-        @include column-policy-options($set-nth-child-offset: 5, $use-once: true);
+        @include column-policy-options-once($set-nth-child-offset: 5);
         @include column-policy(100%);
     }
 }
