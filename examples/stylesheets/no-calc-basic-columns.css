@@ -1,4 +1,4 @@
-/* line 61, ../../dist/_column-policy-private.scss */
+/* line 65, ../../dist/_column-policy-private.scss */
 .column,
 [data-column] {
   float: left;
@@ -33,21 +33,24 @@ body {
   .page {
     overflow: hidden;
     *zoom: 1;
-    overflow: hidden;
   }
-  /* line 83, ../../dist/_column-policy-private.scss */
+  /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+1) {
     clear: left;
     margin-right: 0px;
     padding-right: 0px;
     width: 50%;
+    padding-left: 0;
+    padding-right: 0px;
   }
-  /* line 83, ../../dist/_column-policy-private.scss */
+  /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+2) {
     clear: right;
     margin-right: 0px;
     padding-right: 0px;
     width: 50%;
+    padding-left: 0;
+    padding-right: 0px;
   }
 }
 @media (min-width: 1040px) {
@@ -55,27 +58,32 @@ body {
   .page {
     overflow: hidden;
     *zoom: 1;
-    overflow: hidden;
   }
-  /* line 83, ../../dist/_column-policy-private.scss */
+  /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+1) {
     clear: left;
     margin-right: 0;
     padding-right: 0;
     width: 320px;
+    padding-left: 0;
+    padding-right: 0;
   }
-  /* line 83, ../../dist/_column-policy-private.scss */
+  /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+2) {
     clear: none;
     margin-right: -640px;
     padding-right: 640px;
     width: 100%;
+    padding-left: 0;
+    padding-right: 640px;
   }
-  /* line 83, ../../dist/_column-policy-private.scss */
+  /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+3) {
     clear: right;
     margin-right: 0;
     padding-right: 0;
     width: 320px;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
