@@ -38,11 +38,15 @@ body {
   .page [data-col~="2-1"] {
     clear: left;
     width: 50%;
+    padding-left: 0;
+    padding-right: 0px;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
   .page [data-col~="2-2"] {
     clear: right;
     width: 50%;
+    padding-left: 0;
+    padding-right: 0px;
   }
 }
 @media (min-width: 1040px) {
@@ -55,15 +59,21 @@ body {
   .page [data-col~="3-1"] {
     clear: left;
     width: 320px;
+    padding-left: 0;
+    padding-right: 0px;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
   .page [data-col~="3-2"] {
     clear: none;
     width: calc(100% - 640px);
+    padding-left: 0;
+    padding-right: 0px;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
   .page [data-col~="3-3"] {
     clear: right;
     width: 320px;
+    padding-left: 0;
+    padding-right: 0px;
   }
 }

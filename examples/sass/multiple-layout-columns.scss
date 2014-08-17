@@ -2,6 +2,7 @@
 
 .page {
     @media (min-width: $medium-size) {
+        @include column-policy-options($column-padding: 20px, $use-once: true);
         @include column-policy(50%, 50%);
     }
 
