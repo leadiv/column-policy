@@ -234,7 +234,6 @@
     $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
 ) {
-
     @if (not $use-once) {
         @include _column-policy-set-factory-settings(
             $use-nth-of-type,

@@ -114,7 +114,19 @@ $column-policy-internal-attribute-name: "column" !default;
 @mixin _column-policy-column-padding($column, $columns, $fluid-padding: 0px) {
     $gutter: $column-policy-flag-column-padding;
 
-    @if ($gutter != 0) {
+    //
+    // If there is no calc support then the fluid padding is needed.
+    // If calc is being supported then there is no need for
+    // $fluid-padding.
+    //
+    @if ($column-policy-flag-calc-support) {
+        $fluid-padding: 0px;
+    }
+
+    @if ($gutter == 0) {
+        padding-left: 0;
+        padding-right: $fluid-padding;
+    } @else {
         $interval: _column-policy-padding-interval($columns);
         padding-left: abs(($column * $interval) - ($column * $gutter));
         padding-right: (($column + 1) * $interval) - ($column * $gutter) + $fluid-padding;
