@@ -9,6 +9,7 @@ $column-policy-default-flag-data-attribute-support: false;
 $column-policy-default-flag-nth-child-hack-support: false;
 $column-policy-default-flag-nth-child-hack-depth: 20;
 $column-policy-default-flag-nth-child-offset: 0;
+$column-policy-default-flag-nth-of-type-set: 0;
 $column-policy-default-flag-use-once: false;
 $column-policy-default-flag-column-padding: 0;
 $column-policy-default-flag-calc-support: true;
@@ -18,6 +19,7 @@ $column-policy-flag-data-attribute-support: null;
 $column-policy-flag-nth-child-hack-support: null;
 $column-policy-flag-nth-child-hack-depth: null;
 $column-policy-flag-nth-child-offset: null;
+$column-policy-flag-nth-of-type-set: null;
 $column-policy-flag-use-once: null;
 $column-policy-flag-column-padding: null;
 $column-policy-flag-calc-support: null;
@@ -32,6 +34,7 @@ $column-policy-internal-attribute-name: "column" !default;
     $use-nth-child-hack:       $column-policy-default-flag-nth-child-hack-support,
     $set-nth-child-hack-depth: $column-policy-default-flag-nth-child-hack-depth,
     $set-nth-child-offset:     $column-policy-default-flag-nth-child-offset,
+    $set-nth-of-type-set:        $column-policy-default-flag-nth-of-type-set,
     $column-padding:           $column-policy-default-flag-column-padding,
     $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
@@ -41,6 +44,7 @@ $column-policy-internal-attribute-name: "column" !default;
     $column-policy-default-flag-nth-child-hack-support: $use-nth-child-hack;
     $column-policy-default-flag-nth-child-hack-depth:   $set-nth-child-hack-depth;
     $column-policy-default-flag-nth-child-offset:       $set-nth-child-offset;
+    $column-policy-default-flag-nth-of-type-set:          $set-nth-of-type-set;
     $column-policy-default-flag-use-once:               $use-once;
     $column-policy-default-flag-column-padding:         $column-padding;
     $column-policy-default-flag-calc-support:           $use-calc;
@@ -114,7 +118,19 @@ $column-policy-internal-attribute-name: "column" !default;
 @mixin _column-policy-column-padding($column, $columns, $fluid-padding: 0px) {
     $gutter: $column-policy-flag-column-padding;
 
-    @if ($gutter != 0) {
+    //
+    // If there is no calc support then the fluid padding is needed.
+    // If calc is being supported then there is no need for
+    // $fluid-padding.
+    //
+    @if ($column-policy-flag-calc-support) {
+        $fluid-padding: 0px;
+    }
+
+    @if ($gutter == 0) {
+        padding-left: 0;
+        padding-right: $fluid-padding;
+    } @else {
         $interval: _column-policy-padding-interval($columns);
         padding-left: abs(($column * $interval) - ($column * $gutter));
         padding-right: (($column + 1) * $interval) - ($column * $gutter) + $fluid-padding;
@@ -172,6 +188,7 @@ $column-policy-internal-attribute-name: "column" !default;
     $selector-separator: "";
     $item-count: 0;
     $offset: $column-policy-flag-nth-child-offset;
+    $set: $column-policy-flag-nth-of-type-set;
 
     @if ($column-policy-flag-data-attribute-support) {
         $column-selectors: $column-selectors + $selector-separator + '[data-' + $data-attribute + '~="' + $total + "-" + $current + '"]';
@@ -179,7 +196,16 @@ $column-policy-internal-attribute-name: "column" !default;
     }
 
     @if ($column-policy-flag-nth-of-type-support) {
-        $column-selectors: $column-selectors + $selector-separator + "> ." + $classname + ":nth-of-type(" + $total + "n+" + ($current + $offset) + ")";
+        @if ($set > 0) {
+            @if ($current == 1) {
+                $column-selectors: $column-selectors + $selector-separator + "> ." + $classname + ":first-child:nth-last-of-type(" + $set + ")";
+                $selector-separator: ",";
+            }
+
+            $column-selectors: $column-selectors + $selector-separator + "> ." + $classname + ":first-child:nth-last-of-type(" + $set + ") ~ ." + $classname + ":nth-of-type(" + $total + "n+" + ($current + $offset) + ")";
+        } @else {
+            $column-selectors: $column-selectors + $selector-separator + "> ." + $classname + ":nth-of-type(" + $total + "n+" + ($current + $offset) + ")";
+        }
         $selector-separator: ",";
     }
 
