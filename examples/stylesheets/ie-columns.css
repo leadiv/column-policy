@@ -1,4 +1,4 @@
-/* line 61, ../../dist/_column-policy-private.scss */
+/* line 65, ../../dist/_column-policy-private.scss */
 .column,
 [data-column] {
   float: left;
@@ -37,21 +37,21 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 83, ../../dist/_column-policy-private.scss */
+/* line 87, ../../dist/_column-policy-private.scss */
 .page .column:first-child, .page .column:first-child + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column {
   clear: left;
   width: 320px;
   padding-left: 0;
   padding-right: 0px;
 }
-/* line 83, ../../dist/_column-policy-private.scss */
+/* line 87, ../../dist/_column-policy-private.scss */
 .page .column:first-child + .column, .page .column:first-child + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column {
   clear: none;
   width: calc(100% - 640px);
   padding-left: 0;
   padding-right: 0px;
 }
-/* line 83, ../../dist/_column-policy-private.scss */
+/* line 87, ../../dist/_column-policy-private.scss */
 .page .column:first-child + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column, .page .column:first-child + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column + .column {
   clear: right;
   width: 320px;
