@@ -234,7 +234,6 @@
     $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
 ) {
-
     @if (not $use-once) {
         @include _column-policy-set-factory-settings(
             $use-nth-of-type,
@@ -256,6 +255,31 @@
     $column-policy-flag-column-padding:         $column-padding;
     $column-policy-flag-calc-support:           $use-calc;
     $column-policy-flag-use-once:               $use-once;
+}
+
+//
+// Allows for the setting of options for one time use. See
+// column-policy-options for parameter information.
+//
+@mixin column-policy-options-once(
+    $use-nth-of-type:          $column-policy-default-flag-nth-of-type-support,
+    $use-data-attribute:       $column-policy-default-flag-data-attribute-support,
+    $use-nth-child-hack:       $column-policy-default-flag-nth-child-hack-support,
+    $set-nth-child-hack-depth: $column-policy-default-flag-nth-child-hack-depth,
+    $set-nth-child-offset:     $column-policy-default-flag-nth-child-offset,
+    $column-padding:           $column-policy-default-flag-column-padding,
+    $use-calc:                 $column-policy-default-flag-calc-support
+) {
+    @include column-policy-options(
+        $use-nth-of-type: $use-nth-of-type,
+        $use-data-attribute: $use-data-attribute,
+        $use-nth-child-hack: $use-nth-child-hack,
+        $set-nth-child-hack-depth: $set-nth-child-hack-depth,
+        $set-nth-child-offset: $set-nth-child-offset,
+        $column-padding: $column-padding,
+        $use-calc: $use-calc,
+        $use-once: true
+    );
 }
 
 //

@@ -38,11 +38,15 @@ body {
   .page > .column:nth-of-type(2n+1) {
     clear: left;
     width: 50%;
+    padding-left: 0px;
+    padding-right: 10px;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+2) {
     clear: right;
     width: 50%;
+    padding-left: 10px;
+    padding-right: 0px;
   }
 }
 @media (min-width: 1040px) {
@@ -55,11 +59,15 @@ body {
   .page > .column:nth-of-type(2n+1) {
     clear: left;
     width: calc(100% - 320px);
+    padding-left: 0;
+    padding-right: 0px;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+2) {
     clear: right;
     width: 320px;
+    padding-left: 0;
+    padding-right: 0px;
   }
   /* line 157, ../../dist/_column-policy.scss */
   .page {
@@ -70,16 +78,22 @@ body {
   .page > .column:nth-of-type(3n+3) {
     clear: left;
     width: 320px;
+    padding-left: 0;
+    padding-right: 0px;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+4) {
     clear: none;
     width: calc(100% - 640px);
+    padding-left: 0;
+    padding-right: 0px;
   }
   /* line 83, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+5) {
     clear: right;
     width: 320px;
+    padding-left: 0;
+    padding-right: 0px;
   }
   /* line 157, ../../dist/_column-policy.scss */
   .page {
@@ -90,5 +104,7 @@ body {
   .page > .column:nth-of-type(1n+6) {
     clear: right;
     width: 100%;
+    padding-left: 0;
+    padding-right: 0px;
   }
 }
