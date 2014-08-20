@@ -1,11 +1,11 @@
-column-policy
+Column Policy
 ===========
 
 A SASS mixin for generating flexible grid like layouts from a collection of elements.
 
 ## Dependencies
 
-This depends on SASS (version 3.3.7 or greater) and Compass (version 0.12.6 or greater) being installed on the system. All develop has been with 3.3.7 of SASS and 0.12.6 of Compass.
+This depends on SASS (version 3.3.7 or greater) and Compass (version 0.12.6 or greater) being installed on the system.
 
 ## Quick And Dirty Starting Point
 
