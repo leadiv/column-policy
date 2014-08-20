@@ -29,11 +29,6 @@ body {
 }
 
 @media (min-width: 720px) {
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
-  }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+1) {
     clear: left;
@@ -50,11 +45,6 @@ body {
   }
 }
 @media (min-width: 1040px) {
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
-  }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+1) {
     clear: left;
@@ -68,11 +58,6 @@ body {
     width: 320px;
     padding-left: 0;
     padding-right: 0px;
-  }
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
   }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+3) {
@@ -94,11 +79,6 @@ body {
     width: 320px;
     padding-left: 0;
     padding-right: 0px;
-  }
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
   }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(1n+6) {

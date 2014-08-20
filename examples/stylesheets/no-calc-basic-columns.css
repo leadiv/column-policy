@@ -32,7 +32,6 @@ body {
   /* line 157, ../../dist/_column-policy.scss */
   .page {
     overflow: hidden;
-    *zoom: 1;
   }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(2n+1) {
@@ -57,7 +56,6 @@ body {
   /* line 157, ../../dist/_column-policy.scss */
   .page {
     overflow: hidden;
-    *zoom: 1;
   }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .column:nth-of-type(3n+1) {

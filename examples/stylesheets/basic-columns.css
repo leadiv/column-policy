@@ -29,11 +29,6 @@ body {
 }
 
 @media (min-width: 720px) {
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
-  }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:nth-of-type(2n+1) {
     clear: left;
@@ -50,11 +45,6 @@ body {
   }
 }
 @media (min-width: 1040px) {
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
-  }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:nth-of-type(3n+1) {
     clear: left;
