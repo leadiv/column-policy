@@ -234,8 +234,10 @@ $column-policy-internal-attribute-name: "column" !default;
     $selector: $element + ":first-child";
     $minimum: 2;
 
-    @for $i from $minimum through $number {
-        $selector: $selector + " + " + $element;
+    @if ($number >= $minimum ) {
+        @for $i from $minimum through $number {
+            $selector: $selector + " + " + $element;
+        }
     }
 
     @return $selector;
