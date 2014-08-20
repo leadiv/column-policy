@@ -1,7 +1,6 @@
 //
 // This forms the public API for the column-policy functionality.
 //
-@import "compass/utilities/general/clearfix";
 @import "_column-policy-private";
 
 //
@@ -15,8 +14,8 @@
 // @param string $data-attribute - The name of the data attribute to use. The name does not have the data- prefix on it. That gets added by the mixin.
 //
 @mixin column-policy-base($classname: $column-policy-internal-class-name, $data-attribute: $column-policy-internal-attribute-name) {
-    $column-policy-internal-class-name: $classname;
-    $column-policy-internal-attribute-name: $data-attribute;
+    $column-policy-internal-class-name: $classname !global;
+    $column-policy-internal-attribute-name: $data-attribute !global;
 
     @include _column-policy-common-styles;
 }
@@ -154,8 +153,10 @@
         }
     }
 
-    & {
-        @include clearfix;
+    @if ($column-policy-flag-calc-support == false) {
+        & {
+            overflow: hidden;
+        }
     }
 
     //
@@ -230,7 +231,7 @@
     $use-nth-child-hack:       $column-policy-default-flag-nth-child-hack-support,
     $set-nth-child-hack-depth: $column-policy-default-flag-nth-child-hack-depth,
     $set-nth-child-offset:     $column-policy-default-flag-nth-child-offset,
-    $set-nth-of-type-set:        $column-policy-default-flag-nth-of-type-set,
+    $set-nth-of-type-set:      $column-policy-default-flag-nth-of-type-set,
     $column-padding:           $column-policy-default-flag-column-padding,
     $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
@@ -249,15 +250,15 @@
         );
     }
 
-    $column-policy-flag-nth-of-type-support:    $use-nth-of-type;
-    $column-policy-flag-data-attribute-support: $use-data-attribute;
-    $column-policy-flag-nth-child-hack-support: $use-nth-child-hack;
-    $column-policy-flag-nth-child-hack-depth:   $set-nth-child-hack-depth;
-    $column-policy-flag-nth-child-offset:       $set-nth-child-offset;
-    $column-policy-flag-nth-of-type-set:          $set-nth-of-type-set;
-    $column-policy-flag-column-padding:         $column-padding;
-    $column-policy-flag-calc-support:           $use-calc;
-    $column-policy-flag-use-once:               $use-once;
+    $column-policy-flag-nth-of-type-support:    $use-nth-of-type !global;
+    $column-policy-flag-data-attribute-support: $use-data-attribute !global;
+    $column-policy-flag-nth-child-hack-support: $use-nth-child-hack !global;
+    $column-policy-flag-nth-child-hack-depth:   $set-nth-child-hack-depth !global;
+    $column-policy-flag-nth-child-offset:       $set-nth-child-offset !global;
+    $column-policy-flag-nth-of-type-set:        $set-nth-of-type-set !global;
+    $column-policy-flag-column-padding:         $column-padding !global;
+    $column-policy-flag-calc-support:           $use-calc !global;
+    $column-policy-flag-use-once:               $use-once !global;
 }
 
 //
@@ -270,7 +271,7 @@
     $use-nth-child-hack:       $column-policy-default-flag-nth-child-hack-support,
     $set-nth-child-hack-depth: $column-policy-default-flag-nth-child-hack-depth,
     $set-nth-child-offset:     $column-policy-default-flag-nth-child-offset,
-    $set-nth-of-type-set:        $column-policy-default-flag-nth-of-type-set,
+    $set-nth-of-type-set:      $column-policy-default-flag-nth-of-type-set,
     $column-padding:           $column-policy-default-flag-column-padding,
     $use-calc:                 $column-policy-default-flag-calc-support
 ) {

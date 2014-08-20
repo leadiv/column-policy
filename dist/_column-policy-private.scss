@@ -34,20 +34,20 @@ $column-policy-internal-attribute-name: "column" !default;
     $use-nth-child-hack:       $column-policy-default-flag-nth-child-hack-support,
     $set-nth-child-hack-depth: $column-policy-default-flag-nth-child-hack-depth,
     $set-nth-child-offset:     $column-policy-default-flag-nth-child-offset,
-    $set-nth-of-type-set:        $column-policy-default-flag-nth-of-type-set,
+    $set-nth-of-type-set:      $column-policy-default-flag-nth-of-type-set,
     $column-padding:           $column-policy-default-flag-column-padding,
     $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
 ) {
-    $column-policy-default-flag-nth-of-type-support:    $use-nth-of-type;
-    $column-policy-default-flag-data-attribute-support: $use-data-attribute;
-    $column-policy-default-flag-nth-child-hack-support: $use-nth-child-hack;
-    $column-policy-default-flag-nth-child-hack-depth:   $set-nth-child-hack-depth;
-    $column-policy-default-flag-nth-child-offset:       $set-nth-child-offset;
-    $column-policy-default-flag-nth-of-type-set:          $set-nth-of-type-set;
-    $column-policy-default-flag-use-once:               $use-once;
-    $column-policy-default-flag-column-padding:         $column-padding;
-    $column-policy-default-flag-calc-support:           $use-calc;
+    $column-policy-default-flag-nth-of-type-support:    $use-nth-of-type !global;
+    $column-policy-default-flag-data-attribute-support: $use-data-attribute !global;
+    $column-policy-default-flag-nth-child-hack-support: $use-nth-child-hack !global;
+    $column-policy-default-flag-nth-child-hack-depth:   $set-nth-child-hack-depth !global;
+    $column-policy-default-flag-nth-child-offset:       $set-nth-child-offset !global;
+    $column-policy-default-flag-nth-of-type-set:        $set-nth-of-type-set !global;
+    $column-policy-default-flag-use-once:               $use-once !global;
+    $column-policy-default-flag-column-padding:         $column-padding !global;
+    $column-policy-default-flag-calc-support:           $use-calc !global;
 }
 
 //
@@ -57,8 +57,8 @@ $column-policy-internal-attribute-name: "column" !default;
 // @access private
 //
 @mixin _column-policy-common-styles {
-    $classname: $column-policy-internal-class-name;
-    $data-attribute: $column-policy-internal-attribute-name;
+    $classname: $column-policy-internal-class-name !global;
+    $data-attribute: $column-policy-internal-attribute-name !global;
 
     @if ($column-policy-internal-first-use) {
         .#{$classname},
@@ -69,7 +69,7 @@ $column-policy-internal-attribute-name: "column" !default;
         }
     }
 
-    $column-policy-internal-first-use: false;
+    $column-policy-internal-first-use: false !global;
 }
 
 //
@@ -189,6 +189,7 @@ $column-policy-internal-attribute-name: "column" !default;
     $item-count: 0;
     $offset: $column-policy-flag-nth-child-offset;
     $set: $column-policy-flag-nth-of-type-set;
+    $set-first-child:'';
 
     @if ($column-policy-flag-data-attribute-support) {
         $column-selectors: $column-selectors + $selector-separator + '[data-' + $data-attribute + '~="' + $total + "-" + $current + '"]';
@@ -197,12 +198,13 @@ $column-policy-internal-attribute-name: "column" !default;
 
     @if ($column-policy-flag-nth-of-type-support) {
         @if ($set > 0) {
+            $set-first-child: " ." + $classname + ":first-child:nth-last-of-type(" + $set + ")"; 
             @if ($current == 1) {
-                $column-selectors: $column-selectors + $selector-separator + "> ." + $classname + ":first-child:nth-last-of-type(" + $set + ")";
+                $column-selectors: $column-selectors + $selector-separator + ">" + $set-first-child;
                 $selector-separator: ",";
             }
 
-            $column-selectors: $column-selectors + $selector-separator + "> ." + $classname + ":first-child:nth-last-of-type(" + $set + ") ~ ." + $classname + ":nth-of-type(" + $total + "n+" + ($current + $offset) + ")";
+            $column-selectors: $column-selectors + $selector-separator + ">" + $set-first-child + " ~ ." + $classname + ":nth-of-type(" + $total + "n+" + ($current + $offset) + ")";
         } @else {
             $column-selectors: $column-selectors + $selector-separator + "> ." + $classname + ":nth-of-type(" + $total + "n+" + ($current + $offset) + ")";
         }
@@ -234,8 +236,10 @@ $column-policy-internal-attribute-name: "column" !default;
     $selector: $element + ":first-child";
     $minimum: 2;
 
-    @for $i from $minimum through $number {
-        $selector: $selector + " + " + $element;
+    @if ($number >= $minimum ) {
+        @for $i from $minimum through $number {
+            $selector: $selector + " + " + $element;
+        }
     }
 
     @return $selector;

@@ -1,4 +1,4 @@
-/* line 65, ../../dist/_column-policy-private.scss */
+/* line 64, ../../dist/_column-policy-private.scss */
 .c,
 [data-column] {
   float: left;
@@ -29,22 +29,12 @@ body {
 }
 
 @media (min-width: 720px) {
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
-  }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:first-child:nth-last-of-type(1), .page > .c:first-child:nth-last-of-type(1) ~ .c:nth-of-type(1n+1) {
     clear: right;
     width: 100%;
     padding-left: 0;
     padding-right: 0px;
-  }
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
   }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:nth-of-type(2n+1) {
@@ -62,11 +52,6 @@ body {
   }
 }
 @media (min-width: 1040px) {
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
-  }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:first-child:nth-last-of-type(2), .page > .c:first-child:nth-last-of-type(2) ~ .c:nth-of-type(2n+1) {
     clear: left;
@@ -80,11 +65,6 @@ body {
     width: 320px;
     padding-left: 0;
     padding-right: 0px;
-  }
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
   }
   /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:nth-of-type(3n+1) {

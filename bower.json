@@ -1,5 +1,23 @@
 {
-    "version": "1.0.0-beta.2",
-    "name": "Column Policy",
-    "author": "leadiv"
+  "name": "column-policy",
+  "version": "1.0.0-beta.3",
+  "description": "A SASS mixin for generating flexible grid like layouts from a collection of elements.",
+  "keywords": [
+    "grid",
+    "column",
+    "layout",
+    "sass"
+  ],
+  "authors": [
+    "leadiv"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/leadiv/column-policy",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
