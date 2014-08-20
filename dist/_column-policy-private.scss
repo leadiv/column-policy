@@ -34,7 +34,7 @@ $column-policy-internal-attribute-name: "column" !default;
     $use-nth-child-hack:       $column-policy-default-flag-nth-child-hack-support,
     $set-nth-child-hack-depth: $column-policy-default-flag-nth-child-hack-depth,
     $set-nth-child-offset:     $column-policy-default-flag-nth-child-offset,
-    $set-nth-of-type-set:        $column-policy-default-flag-nth-of-type-set,
+    $set-nth-of-type-set:      $column-policy-default-flag-nth-of-type-set,
     $column-padding:           $column-policy-default-flag-column-padding,
     $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
