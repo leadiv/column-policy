@@ -29,19 +29,14 @@ body {
 }
 
 @media (min-width: 720px) {
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
-  }
-  /* line 88, ../../dist/_column-policy-private.scss */
+  /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:nth-of-type(2n+1) {
     clear: left;
     width: 50%;
     padding-left: 0;
     padding-right: 0px;
   }
-  /* line 88, ../../dist/_column-policy-private.scss */
+  /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:nth-of-type(2n+2) {
     clear: right;
     width: 50%;
@@ -50,26 +45,21 @@ body {
   }
 }
 @media (min-width: 1040px) {
-  /* line 157, ../../dist/_column-policy.scss */
-  .page {
-    overflow: hidden;
-    *zoom: 1;
-  }
-  /* line 88, ../../dist/_column-policy-private.scss */
+  /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:nth-of-type(3n+1) {
     clear: left;
     width: 320px;
     padding-left: 0;
     padding-right: 0px;
   }
-  /* line 88, ../../dist/_column-policy-private.scss */
+  /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:nth-of-type(3n+2) {
     clear: none;
     width: calc(100% - 640px);
     padding-left: 0;
     padding-right: 0px;
   }
-  /* line 88, ../../dist/_column-policy-private.scss */
+  /* line 87, ../../dist/_column-policy-private.scss */
   .page > .c:nth-of-type(3n+3) {
     clear: right;
     width: 320px;

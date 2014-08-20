@@ -1,7 +1,6 @@
 //
 // This forms the public API for the column-policy functionality.
 //
-@import "compass/utilities/general/clearfix";
 @import "_column-policy-private";
 
 //
@@ -154,8 +153,10 @@
         }
     }
 
-    & {
-        @include clearfix;
+    @if ($column-policy-flag-calc-support == false) {
+        & {
+            overflow: hidden;
+        }
     }
 
     //
