@@ -1,35 +1,35 @@
-$classname: "c";
-@import "_common";
+$classname: 'c';
+@import 'common';
 
 .page {
-    @media (min-width: $medium-size) {
-        //
-        // If the page grid only has one item then make it 100% width
-        //
-        @include column-policy-options-once($set-nth-of-type-set: 1);
-        @include column-policy(100%);
+  @media (min-width: $medium-size) {
+    //
+    // If the page grid only has one item then make it 100% width
+    //
+    @include column-policy-options-once($set-nth-of-type-set: 1);
+    @include column-policy(100%);
 
-        //
-        // If there are more then one items in the grid then set each of the the two items at 50% width.
-        //
-        @include column-policy(50%, 50%);
-    }
+    //
+    // If there are more then one items in the grid then set each of the the two items at 50% width.
+    //
+    @include column-policy(50%, 50%);
+  }
 
-    @media (min-width: $large-size) {
-        //
-        // At this size the rule about the grid having only one item is still picked up.
-        //
+  @media (min-width: $large-size) {
+    //
+    // At this size the rule about the grid having only one item is still picked up.
+    //
 
-        //
-        // If the grid at this size has only two items then use a fluid and fixed width layout.
- 
-        //
-        @include column-policy-options-once($set-nth-of-type-set: 2);
-        @include column-policy(100%, $fixed-width-column);
+    //
+    // If the grid at this size has only two items then use a fluid and fixed width layout.
 
-        //
-        // If there are more then one or two items then make the grid layout be fluid center with two fixed width columns on either side.
-        //
-        @include column-policy($fixed-width-column, 100%, $fixed-width-column);
-    }
+    //
+    @include column-policy-options-once($set-nth-of-type-set: 2);
+    @include column-policy(100%, $fixed-width-column);
+
+    //
+    // If there are more then one or two items then make the grid layout be fluid center with two fixed width columns on either side.
+    //
+    @include column-policy($fixed-width-column, 100%, $fixed-width-column);
+  }
 }
