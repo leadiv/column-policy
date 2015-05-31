@@ -192,7 +192,7 @@
       //
       @include _column-policy-column-width($column-width, $fluid-negative-space);
       @include _column-policy-column-padding($column-to-display - 1, $total-columns, $fluid-negative-space);
-      
+
       clear: $clear;
     }
   }
