@@ -1,6 +1,6 @@
 {
     "name": "column-policy",
-    "version": "1.0.0-beta.4",
+    "version": "1.0.0-beta.5",
     "description": "A SASS mixin for generating flexible grid like layouts from a collection of elements.",
     "main": "dist/_column-policy.scss",
     "keywords": [
