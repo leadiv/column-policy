@@ -1,24 +1,27 @@
 {
-  "name": "column-policy",
-  "version": "1.0.0-beta.4",
-  "description": "A SASS mixin for generating flexible grid like layouts from a collection of elements.",
-  "main": "dist/_column-policy.scss",
-  "keywords": [
-    "grid",
-    "column",
-    "layout",
-    "sass"
-  ],
-  "authors": [
-    "leadiv"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/leadiv/column-policy",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+    "name": "column-policy",
+    "version": "1.0.0-beta.5",
+    "description": "A SASS mixin for generating flexible grid like layouts from a collection of elements.",
+    "main": "dist/_column-policy.scss",
+    "keywords": [
+        "grid",
+        "column",
+        "layout",
+        "sass"
+    ],
+    "authors": [
+        "leadiv"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/leadiv/column-policy",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "devDependencies": [
+        "hologram-github-theme": "https://github.com/wearecube/hologram-github-theme.git#0.1.3"
+    ]
 }

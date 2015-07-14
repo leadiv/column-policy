@@ -25,8 +25,8 @@ $column-policy-flag-column-padding: null;
 $column-policy-flag-calc-support: null;
 
 $column-policy-internal-first-use: true !default;
-$column-policy-internal-class-name: "column" !default;
-$column-policy-internal-attribute-name: "column" !default;
+$column-policy-internal-class-name: 'column' !default;
+$column-policy-internal-attribute-name: 'column' !default;
 
 @mixin _column-policy-set-factory-settings(
     $use-nth-of-type:          $column-policy-default-flag-nth-of-type-support,
@@ -39,15 +39,15 @@ $column-policy-internal-attribute-name: "column" !default;
     $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
 ) {
-    $column-policy-default-flag-nth-of-type-support:    $use-nth-of-type !global;
-    $column-policy-default-flag-data-attribute-support: $use-data-attribute !global;
-    $column-policy-default-flag-nth-child-hack-support: $use-nth-child-hack !global;
-    $column-policy-default-flag-nth-child-hack-depth:   $set-nth-child-hack-depth !global;
-    $column-policy-default-flag-nth-child-offset:       $set-nth-child-offset !global;
-    $column-policy-default-flag-nth-of-type-set:        $set-nth-of-type-set !global;
-    $column-policy-default-flag-use-once:               $use-once !global;
-    $column-policy-default-flag-column-padding:         $column-padding !global;
-    $column-policy-default-flag-calc-support:           $use-calc !global;
+  $column-policy-default-flag-nth-of-type-support:    $use-nth-of-type !global;
+  $column-policy-default-flag-data-attribute-support: $use-data-attribute !global;
+  $column-policy-default-flag-nth-child-hack-support: $use-nth-child-hack !global;
+  $column-policy-default-flag-nth-child-hack-depth:   $set-nth-child-hack-depth !global;
+  $column-policy-default-flag-nth-child-offset:       $set-nth-child-offset !global;
+  $column-policy-default-flag-nth-of-type-set:        $set-nth-of-type-set !global;
+  $column-policy-default-flag-use-once:               $use-once !global;
+  $column-policy-default-flag-column-padding:         $column-padding !global;
+  $column-policy-default-flag-calc-support:           $use-calc !global;
 }
 
 //
@@ -57,19 +57,19 @@ $column-policy-internal-attribute-name: "column" !default;
 // @access private
 //
 @mixin _column-policy-common-styles {
-    $classname: $column-policy-internal-class-name;
-    $data-attribute: $column-policy-internal-attribute-name;
+  $classname: $column-policy-internal-class-name;
+  $data-attribute: $column-policy-internal-attribute-name;
 
-    @if ($column-policy-internal-first-use) {
-        .#{$classname},
-        [data-#{$data-attribute}] {
-            float: left;
-            position: relative;
-            box-sizing: border-box;
-        }
+  @if ($column-policy-internal-first-use) {
+    .#{$classname},
+    [data-#{$data-attribute}] {
+      box-sizing: border-box;
+      float: left;
+      position: relative;
     }
+  }
 
-    $column-policy-internal-first-use: false !global;
+  $column-policy-internal-first-use: false !global;
 }
 
 //
@@ -82,11 +82,11 @@ $column-policy-internal-attribute-name: "column" !default;
 // are to be applied.
 //
 @mixin _column-policy-column($total, $current) {
-    $column-selectors: _column-policy-column-selectors($total, $current);
+  $column-selectors: _column-policy-column-selectors($total, $current);
 
-    #{$column-selectors} {
-        @content;
-    }
+  #{$column-selectors} {
+    @content;
+  }
 }
 
 //
@@ -115,26 +115,26 @@ $column-policy-internal-attribute-name: "column" !default;
 // being inspected.
 // @param number $columns: (required) The total number of columns.
 //
-@mixin _column-policy-column-padding($column, $columns, $fluid-padding: 0px) {
-    $gutter: $column-policy-flag-column-padding;
+@mixin _column-policy-column-padding($column, $columns, $fluid-padding: 0) {
+  $gutter: $column-policy-flag-column-padding;
 
-    //
-    // If there is no calc support then the fluid padding is needed.
-    // If calc is being supported then there is no need for
-    // $fluid-padding.
-    //
-    @if ($column-policy-flag-calc-support) {
-        $fluid-padding: 0px;
-    }
+  //
+  // If there is no calc support then the fluid padding is needed.
+  // If calc is being supported then there is no need for
+  // $fluid-padding.
+  //
+  @if ($column-policy-flag-calc-support) {
+    $fluid-padding: 0;
+  }
 
-    @if ($gutter == 0) {
-        padding-left: 0;
-        padding-right: $fluid-padding;
-    } @else {
-        $interval: _column-policy-padding-interval($columns);
-        padding-left: abs(($column * $interval) - ($column * $gutter));
-        padding-right: (($column + 1) * $interval) - ($column * $gutter) + $fluid-padding;
-    }
+  @if ($gutter == 0) {
+    padding-left: 0;
+    padding-right: $fluid-padding;
+  } @else {
+    $interval: _column-policy-padding-interval($columns);
+    padding-left: abs(($column * $interval) - ($column * $gutter));
+    padding-right: (($column + 1) * $interval) - ($column * $gutter) + $fluid-padding;
+  }
 }
 
 //
@@ -147,27 +147,27 @@ $column-policy-internal-attribute-name: "column" !default;
 // @param number $offset: (optional) The amount of pixels to decrease the width of the column.
 //
 @mixin _column-policy-column-width($width, $offset: 0) {
-    @if ($column-policy-flag-calc-support) {
-        @if ($offset == 0) {
-            width: $width;
-        } @else {
-            width: calc(#{$width} - #{$offset});
-        }
+  @if ($column-policy-flag-calc-support) {
+    @if ($offset == 0) {
+      width: $width;
     } @else {
-        @if ($offset == 0) {
-            margin-right: $offset;
-        } @else {
-            margin-right: -$offset;
-        }
-
-        //
-        // This is used to push the fluid content into the right spot.
-        // If padding is present then the padding is added to the column
-        // padding as well and this value gets overwritten.
-        //
-        padding-right: $offset; 
-        width: $width;
+      width: calc(#{$width} - #{$offset});
     }
+  } @else {
+    @if ($offset == 0) {
+      margin-right: $offset;
+    } @else {
+      margin-right: -$offset;
+    }
+
+    //
+    // This is used to push the fluid content into the right spot.
+    // If padding is present then the padding is added to the column
+    // padding as well and this value gets overwritten.
+    //
+    padding-right: $offset; 
+    width: $width;
+  }
 }
 
 //
@@ -182,44 +182,44 @@ $column-policy-internal-attribute-name: "column" !default;
 // @returns: A string with all the selectors generated.
 //
 @function _column-policy-column-selectors($total, $current) {
-    $classname: $column-policy-internal-class-name;
-    $data-attribute: $column-policy-internal-attribute-name;
-    $column-selectors: "";
-    $selector-separator: "";
-    $item-count: 0;
-    $offset: $column-policy-flag-nth-child-offset;
-    $set: $column-policy-flag-nth-of-type-set;
-    $set-first-child:'';
+  $classname: $column-policy-internal-class-name;
+  $data-attribute: $column-policy-internal-attribute-name;
+  $column-selectors: '';
+  $selector-separator: '';
+  $item-count: 0;
+  $offset: $column-policy-flag-nth-child-offset;
+  $set: $column-policy-flag-nth-of-type-set;
+  $set-first-child:'';
 
-    @if ($column-policy-flag-data-attribute-support) {
-        $column-selectors: $column-selectors + $selector-separator + '[data-' + $data-attribute + '~="' + $total + "-" + $current + '"]';
-        $selector-separator: ",";
+  @if ($column-policy-flag-data-attribute-support) {
+    $column-selectors: $column-selectors + $selector-separator + '[data-' + $data-attribute + '~="' + $total + '-' + $current + '"]';
+    $selector-separator: ',';
+  }
+
+  @if ($column-policy-flag-nth-of-type-support) {
+    @if ($set > 0) {
+      $set-first-child: ' .' + $classname + ':first-child:nth-last-of-type(' + $set + ')'; 
+      @if ($current == 1) {
+        $column-selectors: $column-selectors + $selector-separator + '>' + $set-first-child;
+        $selector-separator: ',';
+      }
+
+      $column-selectors: $column-selectors + $selector-separator + '>' + $set-first-child + ' ~ .' + $classname + ':nth-of-type(' + $total + 'n+' + ($current + $offset) + ')';
+    } @else {
+      $column-selectors: $column-selectors + $selector-separator + '> .' + $classname + ':nth-of-type(' + $total + 'n+' + ($current + $offset) + ')';
     }
+    $selector-separator: ',';
+  }
 
-    @if ($column-policy-flag-nth-of-type-support) {
-        @if ($set > 0) {
-            $set-first-child: " ." + $classname + ":first-child:nth-last-of-type(" + $set + ")"; 
-            @if ($current == 1) {
-                $column-selectors: $column-selectors + $selector-separator + ">" + $set-first-child;
-                $selector-separator: ",";
-            }
-
-            $column-selectors: $column-selectors + $selector-separator + ">" + $set-first-child + " ~ ." + $classname + ":nth-of-type(" + $total + "n+" + ($current + $offset) + ")";
-        } @else {
-            $column-selectors: $column-selectors + $selector-separator + "> ." + $classname + ":nth-of-type(" + $total + "n+" + ($current + $offset) + ")";
-        }
-        $selector-separator: ",";
+  @if ($column-policy-flag-nth-child-hack-support) {
+    @while ($item-count < $column-policy-flag-nth-child-hack-depth) {
+      $column-selectors: $column-selectors + $selector-separator + _column-policy-nth-child-hack($item-count + $current + $offset, '.' + $classname);
+      $selector-separator: ',';
+      $item-count: $item-count + $total;
     }
+  }
 
-    @if ($column-policy-flag-nth-child-hack-support) {
-        @while ($item-count < $column-policy-flag-nth-child-hack-depth) {
-            $column-selectors: $column-selectors + $selector-separator + _column-policy-nth-child-hack($item-count + $current + $offset, "." + $classname);
-            $selector-separator: ",";
-            $item-count: $item-count + $total;
-        }
-    }
-
-    @return $column-selectors;
+  @return $column-selectors;
 }
 
 //
@@ -233,16 +233,16 @@ $column-policy-internal-attribute-name: "column" !default;
 // @returns: The selector as a string.
 //
 @function _column-policy-nth-child-hack($number, $element) {
-    $selector: $element + ":first-child";
-    $minimum: 2;
+  $selector: $element + ':first-child';
+  $minimum: 2;
 
-    @if ($number >= $minimum ) {
-        @for $i from $minimum through $number {
-            $selector: $selector + " + " + $element;
-        }
+  @if ($number >= $minimum) {
+    @for $i from $minimum through $number {
+      $selector: $selector + ' + ' + $element;
     }
+  }
 
-    @return $selector;
+  @return $selector;
 }
 
 //
@@ -262,5 +262,5 @@ $column-policy-internal-attribute-name: "column" !default;
 // @returns: The total padding (left and right) that each columns needs.
 //
 @function _column-policy-padding-interval($columns) {
-    @return ($column-policy-flag-column-padding * ($columns - 1)) / $columns;
+  @return ($column-policy-flag-column-padding * ($columns - 1)) / $columns;
 }
