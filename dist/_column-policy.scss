@@ -1,23 +1,39 @@
+//doc
+// ---
+// title: Column Policy
+// name: column-policy
+// category: basics
+// ---
 //
 // This forms the public API for the column-policy functionality.
 //
-@import "_column-policy-private";
+@import 'column-policy-private';
 
+//doc
+// ---
+// title: column-policy-base
+// name: column-policy-base
+// category: mixin
+// ---
 //
 // Display the default styles for all columns if they have not been
 // generated yet. Allows base styling to be applied outside of media
 // queries if the first call is in a media query.
-// Sets the class name and data attribute name to be used globally 
+// Sets the class name and data attribute name to be used globally
 // by the mixin.
 //
-// @param string $classname - The name of the class to use.
-// @param string $data-attribute - The name of the data attribute to use. The name does not have the data- prefix on it. That gets added by the mixin.
+// **@param** `string` `$classname`
+// The name of the class to use.
+//
+// **@param** `string` `$data-attribute`
+// The name of the data attribute to use. The name does not have the data-
+// prefix on it. That gets added by the mixin.
 //
 @mixin column-policy-base($classname: $column-policy-internal-class-name, $data-attribute: $column-policy-internal-attribute-name) {
-    $column-policy-internal-class-name: $classname !global;
-    $column-policy-internal-attribute-name: $data-attribute !global;
+  $column-policy-internal-class-name: $classname !global;
+  $column-policy-internal-attribute-name: $data-attribute !global;
 
-    @include _column-policy-common-styles;
+  @include _column-policy-common-styles;
 }
 
 //
@@ -128,78 +144,76 @@
 //     }
 //
 // @access public
-// @param number with unit $columnWidths: The width of each column in
+// @param number with unit $column-widths: The width of each column in
 // the layout. This can either be a percentage or a hard value like pixels.
 //
-@mixin column-policy($columnWidths...) {
-    $totalColumns: length($columnWidths);
-    $fixedWidths: 0px;
+@mixin column-policy($column-widths...) {
+  $total-columns: length($column-widths);
+  $fixed-widths: 0;
 
-    //
-    // Display the default styles for all columns if they have not been
-    // generated yet.
-    //
-    @include _column-policy-common-styles;
+  //
+  // Display the default styles for all columns if they have not been
+  // generated yet.
+  //
+  @include _column-policy-common-styles;
 
-    //
-    // Cacluate the correct padding needed based on the total fixed
-    // width columns.
-    //
-    @each $width in $columnWidths {
-        $unit: unit($width);
+  //
+  // Cacluate the correct padding needed based on the total fixed
+  // width columns.
+  //
+  @each $width in $column-widths {
+    $unit: unit($width);
 
-        @if ($unit != "%") {
-            $fixedWidths: $fixedWidths + $width;
-        }
+    @if ($unit != '%') {
+      $fixed-widths: $fixed-widths + $width;
+    }
+  }
+
+  @if ($column-policy-flag-calc-support == false) {
+    overflow: hidden;
+  }
+
+  //
+  // Determine the margin-right and padding-right to generate for each fluid column.
+  //
+  @for $column-to-display from 1 to $total-columns + 1 {
+    $clear: none;
+    $column-width: nth($column-widths, $column-to-display);
+    $fluid-negative-space: 0;
+
+    @if ($column-to-display == 1) {
+      $clear: left;
     }
 
-    @if ($column-policy-flag-calc-support == false) {
-        & {
-            overflow: hidden;
-        }
+    @if ($column-to-display == $total-columns) {
+      $clear: right;
     }
 
     //
-    // Determine the margin-right and padding-right to generate for each fluid column.
+    // Each fluid column gets a percentage of the fixed width so that it
+    // can make room on the row. So if the column is at 60% then 60% of
+    // the calculated fixed with is applied to the column's margin and
+    // padding.
+    // The padding will push the content of the column visually while
+    // the negative margin will allow for the next column block to pull
+    // itself so it visually is right next to the column.
     //
-    @for $columnToDisplay from 1 to $totalColumns + 1 {
-        $clear: none;
-        $columnWidth: nth($columnWidths, $columnToDisplay);
-        $fluid-negative-space: 0;
-
-        @if ($columnToDisplay == 1) {
-            $clear: left;
-        }
-
-        @if ($columnToDisplay == $totalColumns) {
-            $clear: right;
-        }
-
-        //
-        // Each fluid column gets a percentage of the fixed width so that it
-        // can make room on the row. So if the column is at 60% then 60% of
-        // the calculated fixed with is applied to the column's margin and
-        // padding.
-        // The padding will push the content of the column visually while
-        // the negative margin will allow for the next column block to pull
-        // itself so it visually is right next to the column.
-        //
-        @if (unit($columnWidth) == "%") {
-            $fluid-negative-space: $fixedWidths * ($columnWidth / 100%);
-        }
-
-        @include _column-policy-column($totalColumns, $columnToDisplay) {
-            clear: $clear;
-
-            //
-            // Order is important here. The output of _column-policy-column-width can have a padding which can be overwritten by _column-policy-column-padding
-            //
-            @include _column-policy-column-width($columnWidth, $fluid-negative-space);
-            @include _column-policy-column-padding($columnToDisplay - 1, $totalColumns, $fluid-negative-space);
-        }
+    @if (unit($column-width) == '%') {
+      $fluid-negative-space: $fixed-widths * ($column-width / 100%);
     }
 
-    @include column-policy-options;
+    @include _column-policy-column($total-columns, $column-to-display) {
+      //
+      // Order is important here. The output of _column-policy-column-width can have a padding which can be overwritten by _column-policy-column-padding
+      //
+      @include _column-policy-column-width($column-width, $fluid-negative-space);
+      @include _column-policy-column-padding($column-to-display - 1, $total-columns, $fluid-negative-space);
+
+      clear: $clear;
+    }
+  }
+
+  @include column-policy-options;
 }
 
 //
@@ -236,29 +250,29 @@
     $use-calc:                 $column-policy-default-flag-calc-support,
     $use-once:                 $column-policy-default-flag-use-once
 ) {
-    @if (not $use-once) {
-        @include _column-policy-set-factory-settings(
-            $use-nth-of-type: $use-nth-of-type,
-            $use-data-attribute: $use-data-attribute,
-            $use-nth-child-hack: $use-nth-child-hack,
-            $set-nth-child-hack-depth: $set-nth-child-hack-depth,
-            $set-nth-child-offset: $set-nth-child-offset,
-            $set-nth-of-type-set: $set-nth-of-type-set,
-            $column-padding: $column-padding,
-            $use-calc: $use-calc,
-            $use-once: $use-once
-        );
-    }
+  @if (not $use-once) {
+    @include _column-policy-set-factory-settings(
+        $use-nth-of-type: $use-nth-of-type,
+        $use-data-attribute: $use-data-attribute,
+        $use-nth-child-hack: $use-nth-child-hack,
+        $set-nth-child-hack-depth: $set-nth-child-hack-depth,
+        $set-nth-child-offset: $set-nth-child-offset,
+        $set-nth-of-type-set: $set-nth-of-type-set,
+        $column-padding: $column-padding,
+        $use-calc: $use-calc,
+        $use-once: $use-once
+    );
+  }
 
-    $column-policy-flag-nth-of-type-support:    $use-nth-of-type !global;
-    $column-policy-flag-data-attribute-support: $use-data-attribute !global;
-    $column-policy-flag-nth-child-hack-support: $use-nth-child-hack !global;
-    $column-policy-flag-nth-child-hack-depth:   $set-nth-child-hack-depth !global;
-    $column-policy-flag-nth-child-offset:       $set-nth-child-offset !global;
-    $column-policy-flag-nth-of-type-set:        $set-nth-of-type-set !global;
-    $column-policy-flag-column-padding:         $column-padding !global;
-    $column-policy-flag-calc-support:           $use-calc !global;
-    $column-policy-flag-use-once:               $use-once !global;
+  $column-policy-flag-nth-of-type-support:    $use-nth-of-type !global;
+  $column-policy-flag-data-attribute-support: $use-data-attribute !global;
+  $column-policy-flag-nth-child-hack-support: $use-nth-child-hack !global;
+  $column-policy-flag-nth-child-hack-depth:   $set-nth-child-hack-depth !global;
+  $column-policy-flag-nth-child-offset:       $set-nth-child-offset !global;
+  $column-policy-flag-nth-of-type-set:        $set-nth-of-type-set !global;
+  $column-policy-flag-column-padding:         $column-padding !global;
+  $column-policy-flag-calc-support:           $use-calc !global;
+  $column-policy-flag-use-once:               $use-once !global;
 }
 
 //
@@ -275,17 +289,17 @@
     $column-padding:           $column-policy-default-flag-column-padding,
     $use-calc:                 $column-policy-default-flag-calc-support
 ) {
-    @include column-policy-options(
-        $use-nth-of-type: $use-nth-of-type,
-        $use-data-attribute: $use-data-attribute,
-        $use-nth-child-hack: $use-nth-child-hack,
-        $set-nth-child-hack-depth: $set-nth-child-hack-depth,
-        $set-nth-child-offset: $set-nth-child-offset,
-        $set-nth-of-type-set: $set-nth-of-type-set,
-        $column-padding: $column-padding,
-        $use-calc: $use-calc,
-        $use-once: true
-    );
+  @include column-policy-options(
+      $use-nth-of-type: $use-nth-of-type,
+      $use-data-attribute: $use-data-attribute,
+      $use-nth-child-hack: $use-nth-child-hack,
+      $set-nth-child-hack-depth: $set-nth-child-hack-depth,
+      $set-nth-child-offset: $set-nth-child-offset,
+      $set-nth-of-type-set: $set-nth-of-type-set,
+      $column-padding: $column-padding,
+      $use-calc: $use-calc,
+      $use-once: true
+  );
 }
 
 //
