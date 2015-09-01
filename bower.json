@@ -21,7 +21,7 @@
         "test",
         "tests"
     ],
-    "devDependencies": [
+    "devDependencies": {
         "hologram-github-theme": "https://github.com/wearecube/hologram-github-theme.git#0.1.3"
-    ]
+    }
 }
